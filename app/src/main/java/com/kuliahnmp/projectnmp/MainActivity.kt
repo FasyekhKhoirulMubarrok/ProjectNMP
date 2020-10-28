@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     true
                 }
+                var iyung = "ganteng"
 
             }
 
