@@ -42,11 +42,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     true
                 }
-                var iyung = "ganteng sekali o may god"
-                var yoshTes ="tesYoshua gitHub"
-                var andre = "andre lebih ganteng banget anjirr"
-                var result = andre + iyung + yoshTes
-                var tambahan = "hasil"
+
             }
 
         })

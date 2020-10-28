@@ -12,5 +12,4 @@ class Adapter(val activity: AppCompatActivity, val fragments:ArrayList<Fragment>
     override fun createFragment(position: Int): Fragment {
         return fragments[position]
     }
-
 }
