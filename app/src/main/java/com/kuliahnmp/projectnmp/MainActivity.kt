@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     true
                 }
-                var iyung = "ganteng sekali"
+                var iyung = "ganteng sekali o may god"
 
             }
 
