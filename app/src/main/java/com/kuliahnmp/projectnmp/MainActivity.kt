@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                 var yoshTes ="tesYoshua gitHub"
                 var andre = "andre lebih ganteng banget anjirr"
                 var result = andre + iyung + yoshTes
+                var tambahan = "hasil"
             }
 
         })
