@@ -13,7 +13,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cartView"
             android:layout_width="0dp"
-            android:layout_height="660dp"
+            android:layout_height="400dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnCheckout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -57,5 +58,6 @@
             app:layout_constraintBottom_toBottomOf="@+id/textView"
             app:layout_constraintEnd_toStartOf="@+id/btnCheckout"
             app:layout_constraintTop_toTopOf="@+id/textView" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

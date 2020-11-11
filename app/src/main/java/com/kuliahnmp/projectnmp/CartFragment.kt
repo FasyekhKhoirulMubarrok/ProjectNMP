@@ -36,6 +36,9 @@ class CartFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        var product = Cart(1, "Anjer","lus",".jpg",3,1)
+        carts.add(product)
+        updateList()
     }
 
     override fun onCreateView(
@@ -43,7 +46,7 @@ class CartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart, container, false)
+            return inflater.inflate(R.layout.fragment_cart, container, false)
     }
     fun updateList() {
         val lm: LinearLayoutManager = LinearLayoutManager(activity)
