@@ -8,7 +8,6 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_signup.*
 
 class SignupActivity : AppCompatActivity() {
@@ -33,7 +32,7 @@ class SignupActivity : AppCompatActivity() {
                 ) {
                     override fun getParams(): MutableMap<String, String> {
                         val params = HashMap<String, String>()
-                        params["email"] = txtEmail.text.toString();
+                        params["email"] = txtEmailSG.text.toString();
                         params["username"] = txtUsernameSG.text.toString();
                         params["password"] = txtPasswordSG.text.toString();
                         return params

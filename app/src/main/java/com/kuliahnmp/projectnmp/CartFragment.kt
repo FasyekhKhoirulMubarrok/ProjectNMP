@@ -12,6 +12,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.fragment_cart.*
 import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,6 +27,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class CartFragment : Fragment() {
     // TODO: Rename and change types of parameters
+
     private var param1: String? = null
     private var param2: String? = null
     var carts:ArrayList<Cart> = ArrayList()
@@ -38,7 +40,8 @@ class CartFragment : Fragment() {
         }
         var product = Cart(1, "Anjer","lus",".jpg",3,1)
         carts.add(product)
-        updateList()
+        //updateList()
+        Log.d("cekisiarray", carts.toString())
     }
 
     override fun onCreateView(
@@ -49,14 +52,25 @@ class CartFragment : Fragment() {
         v=  inflater.inflate(R.layout.fragment_cart, container, false)
         return v
     }
-    fun updateList() {
-        val lm: LinearLayoutManager = LinearLayoutManager(activity)
-        var recyclerView = v?.findViewById<RecyclerView>(R.id.cartView)
-        recyclerView?.layoutManager = lm
-        recyclerView?.setHasFixedSize(true)
-        recyclerView?.adapter = CartAdapter(carts, activity!!.applicationContext)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // RecyclerView node initialized here
+        cartView.apply {
+            // set a LinearLayoutManager to handle Android
+            // RecyclerView behavior
+            layoutManager = LinearLayoutManager(activity)
+            // set the custom adapter to the RecyclerView
+            adapter = CartAdapter(carts, activity!!.applicationContext)
+        }
     }
+//    fun updateList() {
+//        val lm: LinearLayoutManager = LinearLayoutManager(activity)
+//        var recyclerView = v?.findViewById<RecyclerView>(R.id.cartView)
+//        recyclerView?.layoutManager = lm
+//        recyclerView?.setHasFixedSize(true)
+//        recyclerView?.adapter = CartAdapter(carts, activity!!.applicationContext)
+//
+//    }
 
     companion object {
         /**
