@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
-    var users:ArrayList<User> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -35,9 +35,9 @@ class LoginActivity : AppCompatActivity() {
                                 playObj.getString("password"),
                                 playObj.getString("email")
                             )
-                            users.add(playlist)
+                            Global.users.add(playlist)
                         }
-                        Log.d("cekisiarray", users.toString())
+                        Log.d("cekisiarray", Global.users.toString())
                         val intent = Intent(this, MainActivity::class.java);
                         startActivity(intent)
                         finish();

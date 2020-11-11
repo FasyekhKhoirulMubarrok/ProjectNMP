@@ -2,6 +2,7 @@ package com.kuliahnmp.projectnmp
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,6 +62,25 @@ class ProductAdapter(
             intent.putExtra("dHarga",harga)
             intent.putExtra("dGambar",gambar)
             context.startActivity(intent)
+        }
+        holder.v.btnAddToCart.setOnClickListener {
+            val model = products.get(position)
+            var ada = false;
+            if(Global.carts.count()>0) {
+                for (i in 0 until (Global.carts.size)) {
+                    if (Global.carts[i].judul==model.judul) {
+                        ada = true;
+                        Global.carts[i].qty += 1;
+                    }
+                }
+            }
+            if(Global.carts.count()==0 || ada == false)
+            {
+                var product = Cart(model.judul,model.deskripsi,model.image_url,model.harga,1)
+                Global.carts.add(product)
+            }
+            System.out.println("Jumlah Carts" + Global.carts.count())
+            Log.d("isi carts", Global.carts.toString())
         }
     }
 

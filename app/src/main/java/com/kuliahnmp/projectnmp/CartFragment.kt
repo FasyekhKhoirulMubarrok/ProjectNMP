@@ -30,7 +30,7 @@ class CartFragment : Fragment() {
 
     private var param1: String? = null
     private var param2: String? = null
-    var carts:ArrayList<Cart> = ArrayList()
+
     var v:View ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +38,9 @@ class CartFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        var product = Cart(1, "Anjer","lus",".jpg",3,1)
-        carts.add(product)
+
         //updateList()
-        Log.d("cekisiarray", carts.toString())
+        Log.d("cekisiarray", Global.carts.toString())
     }
 
     override fun onCreateView(
@@ -52,6 +51,7 @@ class CartFragment : Fragment() {
         v=  inflater.inflate(R.layout.fragment_cart, container, false)
         return v
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // RecyclerView node initialized here
@@ -60,7 +60,7 @@ class CartFragment : Fragment() {
             // RecyclerView behavior
             layoutManager = LinearLayoutManager(activity)
             // set the custom adapter to the RecyclerView
-            adapter = CartAdapter(carts, activity!!.applicationContext)
+            adapter = CartAdapter(Global.carts, activity!!.applicationContext)
         }
     }
 //    fun updateList() {
