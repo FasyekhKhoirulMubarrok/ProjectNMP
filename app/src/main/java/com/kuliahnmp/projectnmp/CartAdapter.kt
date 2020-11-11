@@ -46,6 +46,4 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
         val formattedNumber: String = formatter.format(myNumber)
         holder.v.txtHarga.text = "Rp."+ formattedNumber
     }
-
-
 }
