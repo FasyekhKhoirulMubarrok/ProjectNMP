@@ -29,10 +29,12 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
         val inflater = LayoutInflater.from(parent.context)
         var v = inflater.inflate(R.layout.cart_product_card_layout, parent,false)
         return CartViewHolder(v)
+
     }
 
     override fun getItemCount(): Int {
         return carts.size
+
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
@@ -45,5 +47,6 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
         val myNumber = carts[position].harga
         val formattedNumber: String = formatter.format(myNumber)
         holder.v.txtHarga.text = "Rp."+ formattedNumber
+
     }
 }

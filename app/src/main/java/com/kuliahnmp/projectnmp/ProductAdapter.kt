@@ -82,7 +82,10 @@ class ProductAdapter(
             System.out.println("Jumlah Carts" + Global.carts.count())
             Log.d("isi carts", Global.carts.toString())
         }
+
     }
+
+
 
 
 }

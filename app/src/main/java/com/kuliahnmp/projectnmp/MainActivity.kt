@@ -35,15 +35,20 @@ class MainActivity : AppCompatActivity() {
                         viewPager.currentItem = 0
                     } else if(it.itemId == R.id.itemCart) {
                         viewPager.currentItem = 1
+                        supportFragmentManager.beginTransaction().detach(fragments[1]).attach(fragments[1]).commit()
                     }else if(it.itemId == R.id.itemHistory) {
                         viewPager.currentItem = 2
                     }else {
                         viewPager.currentItem = 3
                     }
                     true
+
                 }
 
+
             }
+
+
 
         })
 

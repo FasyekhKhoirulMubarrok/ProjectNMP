@@ -37,6 +37,7 @@ class CartFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+
         }
 
         //updateList()
@@ -63,6 +64,10 @@ class CartFragment : Fragment() {
             adapter = CartAdapter(Global.carts, activity!!.applicationContext)
         }
     }
+    override fun onResume() {
+        super.onResume()
+    }
+
 //    fun updateList() {
 //        val lm: LinearLayoutManager = LinearLayoutManager(activity)
 //        var recyclerView = v?.findViewById<RecyclerView>(R.id.cartView)
@@ -89,6 +94,8 @@ class CartFragment : Fragment() {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }
+
             }
+
     }
 }
