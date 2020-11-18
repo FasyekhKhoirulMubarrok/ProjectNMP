@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -35,9 +37,10 @@ class MainActivity : AppCompatActivity() {
                         viewPager.currentItem = 0
                     } else if(it.itemId == R.id.itemCart) {
                         viewPager.currentItem = 1
-                        supportFragmentManager.beginTransaction().detach(fragments[1]).attach(fragments[1]).commit()
+                        supportFragmentManager.beginTransaction().attach(fragments[1]).detach(fragments[1]).commit()
                     }else if(it.itemId == R.id.itemHistory) {
                         viewPager.currentItem = 2
+                        supportFragmentManager.beginTransaction().attach(fragments[2]).detach(fragments[2]).commit()
                     }else {
                         viewPager.currentItem = 3
                     }

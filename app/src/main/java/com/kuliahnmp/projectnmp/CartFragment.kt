@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -13,6 +14,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_cart.*
+import kotlinx.android.synthetic.main.fragment_cart.view.*
 import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,7 +33,7 @@ class CartFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    var v:View ?= null
+    //var v:View ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -49,7 +51,17 @@ class CartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        v=  inflater.inflate(R.layout.fragment_cart, container, false)
+        val v =  inflater.inflate(R.layout.fragment_cart, container, false)
+        var s = v.findViewById<TextView>(R.id.txtSubtotal)
+        var subTotalHarga:Int = 0;
+        if(Global.carts.count()>0) {
+            for (i in 0 until (Global.carts.size)) {
+                subTotalHarga += Global.carts[i].harga * Global.carts[i].qty;
+                System.out.println("Index " + subTotalHarga)
+            }
+        }
+        //var subTotalHargaFormat: String = formatter.format(subTotalHarga)
+        s.text = "Rp."+ subTotalHarga.toString()
         return v
     }
 

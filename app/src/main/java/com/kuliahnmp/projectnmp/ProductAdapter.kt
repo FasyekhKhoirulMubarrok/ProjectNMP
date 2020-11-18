@@ -79,8 +79,10 @@ class ProductAdapter(
                 var product = Cart(model.judul,model.deskripsi,model.image_url,model.harga,1)
                 Global.carts.add(product)
             }
+
             System.out.println("Jumlah Carts" + Global.carts.count())
             Log.d("isi carts", Global.carts.toString())
+
         }
 
     }

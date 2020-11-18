@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cart_product_card_layout.view.*
+import kotlinx.android.synthetic.main.fragment_cart.view.*
 import kotlinx.android.synthetic.main.product_card_layout.view.*
 import kotlinx.android.synthetic.main.product_card_layout.view.imageView
 import kotlinx.android.synthetic.main.product_card_layout.view.txtDeskripsi
@@ -47,6 +48,7 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
         val myNumber = carts[position].harga
         val formattedNumber: String = formatter.format(myNumber)
         holder.v.txtHarga.text = "Rp."+ formattedNumber
+
 
     }
 }
