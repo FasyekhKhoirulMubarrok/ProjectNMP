@@ -1,7 +1,9 @@
 package com.kuliahnmp.projectnmp
 
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import androidx.appcompat.app.ActionBar
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -18,6 +20,7 @@ class DetailActivity : AppCompatActivity() {
         actionBar!!.setDisplayHomeAsUpEnabled(true)
         actionBar!!.setDisplayShowHomeEnabled(true)
 
+
         var intent = intent
         val dJudul = intent.getStringExtra("dJudul")
         val dDeskripsi = intent.getStringExtra("dDeskripsi")
@@ -25,7 +28,7 @@ class DetailActivity : AppCompatActivity() {
         val dHarga = intent.getIntExtra("dHarga", 0)
         val dGambar = intent.getStringExtra("dGambar")
 //
-        actionBar.setTitle(dJudul)
+        actionBar.setTitle(Html.fromHtml("<font color='black'>" + dJudul + "</font>"))
         txtJudulDetail.text = dJudul
         txtDeskripsiDetail.text = dDeskripsi
         txtKategoriDetail.text = dKategori

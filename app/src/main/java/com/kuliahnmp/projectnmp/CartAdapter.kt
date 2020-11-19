@@ -48,7 +48,31 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
         val myNumber = carts[position].harga
         val formattedNumber: String = formatter.format(myNumber)
         holder.v.txtHarga.text = "Rp."+ formattedNumber
+        holder.v.btnMin.setOnClickListener{
+            carts[position].qty -= 1
+            holder.v.txtQty.text = carts[position].qty.toString()
+            Global.carts[position].qty = carts[position].qty
+            if(Global.carts.count()>0) {
+                for (i in 0 until (Global.carts.size)) {
 
+                    Global.subTotalHarga = Global.carts[i].harga * Global.carts[i].qty;
+                    System.out.println("Index " + Global.subTotalHarga)
+                }
+            }
+        }
+        holder.v.btnPlus.setOnClickListener{
+            carts[position].qty += 1
+            holder.v.txtQty.text = carts[position].qty.toString()
+            Global.carts[position].qty = carts[position].qty
+            if(Global.carts.count()>0) {
+                for (i in 0 until (Global.carts.size)) {
+
+                    Global.subTotalHarga = Global.carts[i].harga * Global.carts[i].qty;
+                    System.out.println("Index " + Global.subTotalHarga)
+                }
+            }
+        }
 
     }
+
 }

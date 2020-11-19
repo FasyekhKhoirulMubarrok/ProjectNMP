@@ -47,15 +47,15 @@ class CartFragment : Fragment() {
         // Inflate the layout for this fragment
         val v =  inflater.inflate(R.layout.fragment_cart, container, false)
         var s = v.findViewById<TextView>(R.id.txtSubtotal)
-        var subTotalHarga:Int = 0;
         if(Global.carts.count()>0) {
             for (i in 0 until (Global.carts.size)) {
-                subTotalHarga += Global.carts[i].harga * Global.carts[i].qty;
-                System.out.println("Index " + subTotalHarga)
+
+                Global.subTotalHarga += Global.carts[i].harga * Global.carts[i].qty;
+                System.out.println("Index " + Global.subTotalHarga)
             }
         }
         val formatter: NumberFormat = DecimalFormat("#,###")
-        var subTotalHargaFormat: String = formatter.format(subTotalHarga)
+        var subTotalHargaFormat: String = formatter.format(Global.subTotalHarga)
         s.text = "Rp."+ subTotalHargaFormat.toString()
         return v
     }
