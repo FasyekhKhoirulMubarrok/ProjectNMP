@@ -1,13 +1,12 @@
 package com.kuliahnmp.projectnmp
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
@@ -81,11 +80,14 @@ class HomeFragment : Fragment() {
     }
 
     fun updateList() {
-        val lm: LinearLayoutManager = LinearLayoutManager(activity)
+        val gl: GridLayoutManager = GridLayoutManager(activity, 2)
+
+        //val lm: LinearLayoutManager = LinearLayoutManager(activity)
         var recyclerView = v?.findViewById<RecyclerView>(R.id.productView)
-        recyclerView?.layoutManager = lm
+        recyclerView?.layoutManager = gl
         recyclerView?.setHasFixedSize(true)
         recyclerView?.adapter = ProductAdapter(products, requireActivity())
+
     }
 
     companion object {

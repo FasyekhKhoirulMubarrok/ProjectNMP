@@ -2,12 +2,17 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <!--bar-->
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorBackground</item>
+        <!--endbar-->
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="color">@color/colorFont</item>
+
 
     </style>
     <style name="heading" parent="TextAppearance.MaterialComponents.Headline1">

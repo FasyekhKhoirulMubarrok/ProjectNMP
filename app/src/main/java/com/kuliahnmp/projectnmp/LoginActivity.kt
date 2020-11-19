@@ -3,7 +3,9 @@ package com.kuliahnmp.projectnmp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
+import androidx.appcompat.app.ActionBar
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -16,6 +18,10 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        val actionBar : ActionBar? = supportActionBar
+        actionBar!!.hide()
+        //actionBar!!.setTitle(Html.fromHtml("<font color='black' >" + getString(R.string.app_name) + "</font>"))
 
         btnLogin.setOnClickListener {
             val q = Volley.newRequestQueue(this)

@@ -38,6 +38,7 @@ class ProductAdapter(
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+
         val url = products[position].image_url
         Picasso.get().load(url).into(holder.v.imageView)
         holder.v.txtJudul.text = products[position].judul
@@ -63,7 +64,7 @@ class ProductAdapter(
             intent.putExtra("dGambar",gambar)
             context.startActivity(intent)
         }
-        holder.v.btnAddToCart.setOnClickListener {
+        holder.v.btnAdd.setOnClickListener {
             val model = products.get(position)
             var ada = false;
             if(Global.carts.count()>0) {

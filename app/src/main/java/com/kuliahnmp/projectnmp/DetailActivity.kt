@@ -24,7 +24,7 @@ class DetailActivity : AppCompatActivity() {
         val dKategori = intent.getStringExtra("dKategori")
         val dHarga = intent.getIntExtra("dHarga", 0)
         val dGambar = intent.getStringExtra("dGambar")
-
+//
         actionBar.setTitle(dJudul)
         txtJudulDetail.text = dJudul
         txtDeskripsiDetail.text = dDeskripsi

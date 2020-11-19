@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimary">#FFFFFF</color>
 <!--    primary dark itu di atas, Primary di atas default upperbar-->
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorPrimaryVariant">#ffffff</color>
+    <color name="colorPrimaryVariant">#000000</color>
     <color name="colorAccent">#ffffff</color>
-
+    <color name="textColorPrimary">#000000</color>
     <color name="colorBackground">#ffffff</color>
-    <color name="colorFont">#212121</color>
+    <color name="colorFont">#000000</color>
     <color name="InactiveBottomNavIconColor">#9a9a9a</color>
 
 </resources>

@@ -8,11 +8,11 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="368dp"
-        android:layout_height="195dp"
+        android:layout_height="150dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,9 +40,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
                 android:text="Harga"
                 android:textAppearance="@style/subtitle"
+                app:layout_constraintBottom_toTopOf="@+id/btnMin"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/txtDeskripsi" />
 
@@ -55,49 +56,52 @@
                 android:text="Judul"
                 android:textAppearance="@style/heading"
                 android:textColor="#000000"
+                android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txtDeskripsi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="216dp"
+                android:layout_height="16dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:text="Description"
                 android:textAppearance="@style/body"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/txtJudul" />
-
-            <Button
-                android:id="@+id/btnPlus"
-                android:layout_width="36dp"
-                android:layout_height="41dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:text="+"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/txtHarga" />
-
-            <Button
-                android:id="@+id/btnMin"
-                android:layout_width="36dp"
-                android:layout_height="41dp"
-                android:layout_marginEnd="32dp"
-                android:text="-"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/btnPlus" />
 
             <TextView
                 android:id="@+id/txtQty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
                 android:layout_marginBottom="24dp"
                 android:text="0"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnMin"
-                app:layout_constraintStart_toEndOf="@+id/btnPlus" />
+                app:layout_constraintEnd_toStartOf="@+id/btnPlus"
+                app:layout_constraintStart_toEndOf="@+id/btnMin" />
+
+            <ImageView
+                android:id="@+id/btnPlus"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtQty"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtQty"
+                app:srcCompat="@drawable/ic_btnplus" />
+
+            <ImageView
+                android:id="@+id/btnMin"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtQty"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/txtQty"
+                app:srcCompat="@drawable/ic_btnmin" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

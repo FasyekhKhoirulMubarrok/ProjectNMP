@@ -2,20 +2,15 @@ package com.kuliahnmp.projectnmp
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_cart.*
-import kotlinx.android.synthetic.main.fragment_cart.view.*
-import org.json.JSONObject
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,7 +36,6 @@ class CartFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
 
         }
-
         //updateList()
         Log.d("cekisiarray", Global.carts.toString())
     }
@@ -60,8 +54,9 @@ class CartFragment : Fragment() {
                 System.out.println("Index " + subTotalHarga)
             }
         }
-        //var subTotalHargaFormat: String = formatter.format(subTotalHarga)
-        s.text = "Rp."+ subTotalHarga.toString()
+        val formatter: NumberFormat = DecimalFormat("#,###")
+        var subTotalHargaFormat: String = formatter.format(subTotalHarga)
+        s.text = "Rp."+ subTotalHargaFormat.toString()
         return v
     }
 
@@ -76,18 +71,6 @@ class CartFragment : Fragment() {
             adapter = CartAdapter(Global.carts, activity!!.applicationContext)
         }
     }
-    override fun onResume() {
-        super.onResume()
-    }
-
-//    fun updateList() {
-//        val lm: LinearLayoutManager = LinearLayoutManager(activity)
-//        var recyclerView = v?.findViewById<RecyclerView>(R.id.cartView)
-//        recyclerView?.layoutManager = lm
-//        recyclerView?.setHasFixedSize(true)
-//        recyclerView?.adapter = CartAdapter(carts, activity!!.applicationContext)
-//
-//    }
 
     companion object {
         /**
