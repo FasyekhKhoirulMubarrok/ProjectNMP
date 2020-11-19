@@ -1,10 +1,19 @@
 package com.kuliahnmp.projectnmp
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.activity_signup.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +35,31 @@ class ProfileFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+        btnChangeProfile.setOnClickListener {
+            if(txtPasswordProfile.text.toString() == txtRepeatPasswordProfile.text.toString()) {
+                val q = Volley.newRequestQueue(activity)
+                val url = "http://ubaya.prototipe.net/nmp160418005/changeprofieproses.php"
+                val stringRequest = object : StringRequest(
+                    Request.Method.POST, url,
+                    Response.Listener {
+                        Log.d("cekparams", it)
+                        Toast.makeText(activity, "Data Profile berhasil Diubah", Toast.LENGTH_SHORT).show()
+                    },
+                    Response.ErrorListener {
+                        Log.d("cekparams", it.message.toString())
+                    }
+                ) {
+                    override fun getParams(): MutableMap<String, String> {
+                        val params = HashMap<String, String>()
+                        params["email"] = txtEmailProfile.text.toString();
+                        params["username"] = txtUsernameProfile.text.toString();
+                        params["password"] = txtPasswordProfile.text.toString();
+                        return params
+                    }
+                }
+                q.add(stringRequest)
+            }
         }
     }
 
