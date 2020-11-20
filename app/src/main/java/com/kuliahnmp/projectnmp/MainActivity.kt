@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                         fragmentMan!!.beginTransaction().detach(fragments[2]).attach(fragments[2]).commit()
                     }else {
                         viewPager.currentItem = 3
-                        fragmentMan!!.beginTransaction().detach(fragments[2]).attach(fragments[2]).commit()
+                        fragmentMan!!.beginTransaction().detach(fragments[3]).attach(fragments[3]).commit()
                     }
                     true
 
