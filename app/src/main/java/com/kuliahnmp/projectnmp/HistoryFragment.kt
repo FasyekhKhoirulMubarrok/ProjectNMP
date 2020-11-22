@@ -13,6 +13,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.fragment_cart.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.json.JSONObject
 
@@ -30,7 +31,7 @@ class HistoryFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    var products:ArrayList<Product> = ArrayList()
+    //var histories:ArrayList<History> = ArrayList()
     var v:View ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,29 +41,32 @@ class HistoryFragment : Fragment() {
         }
 //        (activity as MainActivity?)!!
 //            .setActionBarTitle("History")
+        bacadata()
+    }
+    fun bacadata(){
         val q = Volley.newRequestQueue(activity)
         val url = "http://ubaya.prototipe.net/nmp160418005/getHisto.php"
         var stringRequest = object : StringRequest(
             Request.Method.POST, url,
             Response.Listener<String> {
-                Log.d("histrores", it)
+                Log.d("histrories", it)
                 val obj = JSONObject(it)
                 if(obj.getString("result") == "OK") {
                     val data = obj.getJSONArray("data")
                     for(i in 0 until data.length()) {
                         val playObj = data.getJSONObject(i)
-                        val product = Product(
-                            playObj.getInt("id"),
-                            playObj.getString("judul"),
-                            playObj.getString("deskripsi"),
-                            playObj.getString("kategori"),
-                            playObj.getString("image_url"),
-                            playObj.getInt("harga")
+                        val history = History(
+                            playObj.getInt("orderid"),
+                            playObj.getInt("users_id"),
+                            playObj.getString("dateOrder"),
+                            playObj.getInt("jumItem"),
+                            playObj.getInt("subtotal"),
+                            playObj.getInt("qty")
                         )
-                        products.add(product)
+                        Global.histories.add(history)
                     }
                     updateList()
-                    Log.d("cekisiarray", products.toString())
+                    Log.d("cekisiarray", Global.histories.toString())
                 }
             },
             Response.ErrorListener {
@@ -78,6 +82,11 @@ class HistoryFragment : Fragment() {
         }
         q.add(stringRequest)
     }
+    override fun onResume() {
+        super.onResume()
+        Global.histories.clear()
+        bacadata()
+    }
 
 
     override fun onCreateView(
@@ -90,15 +99,14 @@ class HistoryFragment : Fragment() {
     }
 
     fun updateList() {
-
-
         val lm: LinearLayoutManager = LinearLayoutManager(activity)
         var recyclerView = v?.findViewById<RecyclerView>(R.id.histoView)
         recyclerView?.layoutManager = lm
         recyclerView?.setHasFixedSize(true)
-        recyclerView?.adapter = HistoAdapter(products, requireActivity())
+        recyclerView?.adapter = HistoAdapter(Global.histories, requireActivity())
 
     }
+
 
     companion object {
         /**

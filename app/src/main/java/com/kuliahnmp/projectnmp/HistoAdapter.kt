@@ -1,53 +1,48 @@
 package com.kuliahnmp.projectnmp
 
 import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.history_card.view.*
-import kotlinx.android.synthetic.main.product_card_layout.view.*
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
 class HistoAdapter (
-    val products: ArrayList<Product>, val context: Context
+    val histories: ArrayList<History>, val context: Context
 )
     : RecyclerView.Adapter<HistoAdapter.ProductViewHolder>(){
 
     class ProductViewHolder(val v: View): RecyclerView.ViewHolder(v){
-        val judul = v.findViewById<TextView>(R.id.txtJudul)
-        val deskripsi = v.findViewById<TextView>(R.id.txtDeskripsi)
-        val kategori = v.findViewById<TextView>(R.id.txtKategori)
-        val harga = v.findViewById<TextView>(R.id.txtHarga)
+        val orderID = v.findViewById<TextView>(R.id.txtOrderID)
+        val qty = v.findViewById<TextView>(R.id.txtQty)
+        val dateOrder = v.findViewById<TextView>(R.id.txtDate)
+        val grandtotal = v.findViewById<TextView>(R.id.txtGrandTotal)
+        val jumitem = v.findViewById<TextView>(R.id.txtJumlahJenis)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoAdapter.ProductViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         var v = inflater.inflate(R.layout.history_card, parent,false)
         return ProductViewHolder(v)
     }
 
     override fun getItemCount(): Int {
-        return products.size
+        return histories.size
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
 
-        val url = products[position].image_url
-        Picasso.get().load(url).into(holder.v.histoImg)
-        holder.v.txtJudulHisto.text = products[position].judul
-        holder.v.txtDescHisto.text = products[position].deskripsi
-        holder.v.txtKateHisto.text = products[position].kategori
-        //holder.v.txtJumlahHisto.text = products[position].kategori
+        holder.v.txtOrderID.text = histories[position].id.toString()
+        holder.v.txtQty.text = histories[position].qty.toString()
+        holder.v.txtJumlahJenis.text = histories[position].jumitem.toString()
+        holder.v.txtDate.text= histories[position].orderdate.toString()
         val formatter: NumberFormat = DecimalFormat("#,###")
-        val myNumber = products[position].harga
+        val myNumber = histories[position].subtotal
         val formattedNumber: String = formatter.format(myNumber)
-        holder.v.txtHargaHisto.text = "Rp."+ formattedNumber
+        holder.v.txtGrandTotal.text = "Rp."+ formattedNumber
 
 
     }

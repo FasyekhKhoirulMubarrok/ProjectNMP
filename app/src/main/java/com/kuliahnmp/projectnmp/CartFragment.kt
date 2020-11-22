@@ -42,36 +42,11 @@ class CartFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
 
         }
-//        btnCheckout.setOnClickListener{
-//            val q = Volley.newRequestQueue(activity!!.applicationContext)
-//            val url = "http://ubaya.prototipe.net/nmp160418005/addhistory.php" // ?id=1
-//
-//            val stringRequest = object : StringRequest(
-//                Request.Method.POST, url,
-//                Response.Listener {
-//                    Log.d("cekparams", it)},
-//                Response.ErrorListener {
-//                    Log.d("cekparams", it.message.toString())
-//
-//                }
-//            )
-//            {
-////                override fun getParams(): MutableMap<String, String> {
-////                    val params = HashMap<String, String>()
-////                    params["tanggalorder"] = txtJudul.text.toString()
-////                    params["qty"] = txtSubjudul.text.toString() // di for
-////                    params["jmljenis"] = txtDeskripsi.text.toString()
-////                    params["grandtotal"] = txtUrl.text.toString()
-////
-////                    return params
-////                }
-//            }
-//
-//            q.add(stringRequest)
-//        }
+
         //updateList()
         Log.d("cekisiarray", Global.carts.toString())
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -84,9 +59,38 @@ class CartFragment : Fragment() {
         var subTotalHargaFormat: String = formatter.format(Global.subTotalHarga)
         v.txtSubtotal.text = "Rp."+ subTotalHargaFormat
 
+        v.btnCheckout.setOnClickListener{
+            val q = Volley.newRequestQueue(activity!!.applicationContext)
+            val url = "http://ubaya.prototipe.net/nmp160418005/addhistory.php" // ?id=1
+
+            val stringRequest = object : StringRequest(
+                Request.Method.POST, url,
+                Response.Listener {
+                    Log.d("cekparams", it)},
+                Response.ErrorListener {
+                    Log.d("cekparams", it.message.toString())
+
+                }
+            )
+            {
+                override fun getParams(): MutableMap<String, String> {
+                    val params = HashMap<String, String>()
+                    //params["productsid"] = Global.product[].toString()
+                    params["usersid"] = Global.users[0].id.toString()
+                    params["tanggalorder"] = Global.orderDate.toString()
+                    params["qty"] = Global.qtyG.toString()
+                    params["jmlItem"] = Global.carts.count().toString()
+                    params["grandtotal"] = Global.subTotalHarga.toString()
+
+                    return params
+                }
+            }
+
+            q.add(stringRequest)
+        }
+
         return v
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // RecyclerView node initialized here

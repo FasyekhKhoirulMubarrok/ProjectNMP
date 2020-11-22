@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cart_product_card_layout.view.*
-import kotlinx.android.synthetic.main.fragment_cart.view.*
 import kotlinx.android.synthetic.main.product_card_layout.view.imageView
 import kotlinx.android.synthetic.main.product_card_layout.view.txtDeskripsi
 import kotlinx.android.synthetic.main.product_card_layout.view.txtHarga
@@ -28,6 +28,7 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
     }
 
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         var v = inflater.inflate(R.layout.cart_product_card_layout, parent,false)
@@ -39,7 +40,6 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
         return carts.size
 
     }
-
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val url = carts[position].image_url
         Picasso.get().load(url).into(holder.v.imageView)
@@ -63,36 +63,42 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
 
                         Global.subTotalHarga += Global.carts[i].harga * Global.carts[i].qty;
                         System.out.println("Index min "+ carts[position].judul+" " + Global.subTotalHarga)
-                        //holder.v.txtSubtotal.text = Global.subTotalHarga.toString()
-                        currentHarga += Global.subTotalHarga
+                        currentHarga -= Global.subTotalHarga
                     }
                 }
                 Global.subTotalHarga = currentHarga
                 System.out.println("Total now "+ Global.subTotalHarga)
-                holder.v.txtSubtotal.text = Global.subTotalHarga.toString()
+                //holder.v.txtSubtotal.text = Global.subTotalHarga.toString()
             }else{
                 Global.carts.remove(Global.carts[position])
             }
 
         }
+
         holder.v.btnPlus.setOnClickListener{
             var currentHarga = 0
+            var currentQty=0
+            var qty = 0
+
             carts[position].qty++
-            var currentQty = carts[position].qty
+            currentQty = carts[position].qty
             holder.v.txtQty.text = currentQty.toString()
             Global.carts[position].qty = currentQty
             if(Global.carts.count()>0) {
                 for (i in 0 until (Global.carts.size)) {
-
                     Global.subTotalHarga = Global.carts[i].harga * Global.carts[i].qty;
                     System.out.println("Index plus "+ carts[position].judul+" " + Global.subTotalHarga)
                     //
                     currentHarga += Global.subTotalHarga
+                    qty += Global.carts[i].qty
                 }
             }
+            Global.qtyG = qty
             Global.subTotalHarga = currentHarga
             System.out.println("Total now "+ Global.subTotalHarga)
-            holder.v.txtSubtotal.text = Global.subTotalHarga.toString()
+            System.out.println("Total qty "+ Global.qtyG)
+            System.out.println("Jml cart "+ Global.carts.count())
+            //holder.v.txtSubtotal.text = Global.subTotalHarga.toString()\
         }
 
     }
