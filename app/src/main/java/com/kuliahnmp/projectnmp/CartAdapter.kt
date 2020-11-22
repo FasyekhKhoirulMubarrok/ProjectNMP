@@ -1,11 +1,11 @@
 package com.kuliahnmp.projectnmp
 
 import android.content.Context
+import android.graphics.ColorSpace.Model
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cart_product_card_layout.view.*
@@ -16,15 +16,15 @@ import kotlinx.android.synthetic.main.product_card_layout.view.txtJudul
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
-class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
+class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
     class CartViewHolder(val v: View): RecyclerView.ViewHolder(v){
         val judul = v.findViewById<TextView>(R.id.txtJudul)
         val deskripsi = v.findViewById<TextView>(R.id.txtDeskripsi)
         val harga = v.findViewById<TextView>(R.id.txtHarga)
         val qty = v.findViewById<TextView>(R.id.txtQty)
 
-//        val subtot = v.findViewById<TextView>(R.id.txtSubtotal)
+        val subtot = v.findViewById<TextView>(R.id.txtSubtotal)
     }
 
 
@@ -61,16 +61,14 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
                 if(Global.carts.count()>0) {
                     for (i in 0 until (Global.carts.size)) {
 
-                        Global.subTotalHarga += Global.carts[i].harga * Global.carts[i].qty;
-                        System.out.println("Index min "+ carts[position].judul+" " + Global.subTotalHarga)
-                        currentHarga -= Global.subTotalHarga
+                        currentHarga += Global.carts[i].harga * Global.carts[i].qty;
                     }
                 }
-                Global.subTotalHarga = currentHarga
-                System.out.println("Total now "+ Global.subTotalHarga)
+                Global.subTotalHarga -= currentHarga
                 //holder.v.txtSubtotal.text = Global.subTotalHarga.toString()
             }else{
                 Global.carts.remove(Global.carts[position])
+                notifyItemRemoved(position)
             }
 
         }
@@ -87,7 +85,6 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
             if(Global.carts.count()>0) {
                 for (i in 0 until (Global.carts.size)) {
                     Global.subTotalHarga = Global.carts[i].harga * Global.carts[i].qty;
-                    System.out.println("Index plus "+ carts[position].judul+" " + Global.subTotalHarga)
                     //
                     currentHarga += Global.subTotalHarga
                     qty += Global.carts[i].qty
@@ -95,12 +92,14 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
             }
             Global.qtyG = qty
             Global.subTotalHarga = currentHarga
-            System.out.println("Total now "+ Global.subTotalHarga)
-            System.out.println("Total qty "+ Global.qtyG)
-            System.out.println("Jml cart "+ Global.carts.count())
-            //holder.v.txtSubtotal.text = Global.subTotalHarga.toString()\
         }
+        System.out.println("subtotal "+ Global.subTotalHarga)
+
 
     }
+    interface OnItemClickListener {
+        fun onItemClick(holder :CartViewHolder)
+    }
+
 
 }

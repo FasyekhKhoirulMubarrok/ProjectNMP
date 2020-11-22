@@ -7,6 +7,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 object Global {
+
     var users:ArrayList<User> = ArrayList()
     var carts:ArrayList<Cart> = ArrayList()
     var histories:ArrayList<History> = ArrayList()
