@@ -97,9 +97,6 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
 
 
     }
-    interface OnItemClickListener {
-        fun onItemClick(holder :CartViewHolder)
-    }
 
 
 }

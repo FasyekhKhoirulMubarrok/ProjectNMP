@@ -38,5 +38,21 @@ class DetailActivity : AppCompatActivity() {
         txtHargaDetail.text = "Rp."+ formattedNumber
         Picasso.get().load(dGambar).into(imageView3)
 
+        btnAdd2.setOnClickListener {
+            var ada = false;
+            if(Global.carts.count()>0) {
+                for (i in 0 until (Global.carts.size)) {
+                    if (Global.carts[i].judul==dJudul) {
+                        ada = true;
+                        Global.carts[i].qty += 1;
+                    }
+                }
+            }
+            if(Global.carts.count()==0 || ada == false)
+            {
+                var product = Cart(dJudul.toString(),dDeskripsi.toString(),dGambar.toString(),dHarga,1)
+                Global.carts.add(product)
+            }
+        }
     }
 }
