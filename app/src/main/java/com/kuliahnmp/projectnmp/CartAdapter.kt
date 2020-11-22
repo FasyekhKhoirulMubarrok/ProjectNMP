@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cart_product_card_layout.view.*
@@ -18,6 +20,7 @@ import java.text.NumberFormat
 
 
 class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+
     class CartViewHolder(val v: View): RecyclerView.ViewHolder(v){
         val judul = v.findViewById<TextView>(R.id.txtJudul)
         val deskripsi = v.findViewById<TextView>(R.id.txtDeskripsi)
@@ -82,7 +85,6 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
             }
             //holder.v.txtSubtotal.text = Global.subTotalHarga.toString()
         }
-
         holder.v.btnPlus.setOnClickListener{
             var currentHarga = 0
             var currentQty=0
@@ -105,8 +107,6 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
 
         }
         System.out.println("subtotal "+ Global.subTotalHarga)
-
-
     }
 
 

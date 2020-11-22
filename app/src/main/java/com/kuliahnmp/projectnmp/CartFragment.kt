@@ -1,6 +1,7 @@
 package com.kuliahnmp.projectnmp
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -66,12 +67,27 @@ class CartFragment : Fragment() {
             // set the custom adapter to the RecyclerView
 
             adapter = CartAdapter(Global.carts, activity!!.applicationContext)
+//            TimerQuest()
 
         }
     }
-
+//    fun TimerQuest(){
+//        var tick = 10;
+//        var count = object : CountDownTimer(1000000, 1000) {
+//            override fun onTick(p0: Long) {
+//                tick--;
+//                onResume()
+//            }
+//            override fun onFinish() {
+//
+//            }
+//        }
+//        count.start();
+//
+//    }
     override fun onResume() {
         super.onResume()
+
         var rv = v?.findViewById<RecyclerView>(R.id.cartView)
         val lm: LinearLayoutManager = LinearLayoutManager(activity)
         rv?.layoutManager = lm
