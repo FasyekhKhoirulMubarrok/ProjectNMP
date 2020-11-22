@@ -67,6 +67,7 @@ class ProductAdapter(
         holder.v.btnAdd.setOnClickListener {
             val model = products.get(position)
             var ada = false;
+            var currentHarga = 0
             if(Global.carts.count()>0) {
                 for (i in 0 until (Global.carts.size)) {
                     if (Global.carts[i].judul==model.judul) {
@@ -80,9 +81,14 @@ class ProductAdapter(
                 var product = Cart(model.judul,model.deskripsi,model.image_url,model.harga,1)
                 Global.carts.add(product)
             }
-
-            System.out.println("Jumlah Carts" + Global.carts.count())
-            Log.d("isi carts", Global.carts.toString())
+            if(Global.carts.count()>0) {
+                for (i in 0 until (Global.carts.size)) {
+                    Global.subTotalHarga = Global.carts[i].harga * Global.carts[i].qty;
+                    //
+                    currentHarga += Global.subTotalHarga
+                }
+            }
+            Global.subTotalHarga = currentHarga
 
         }
 

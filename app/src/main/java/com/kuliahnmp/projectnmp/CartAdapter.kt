@@ -65,12 +65,22 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
                     }
                 }
                 Global.subTotalHarga -= currentHarga
-                //holder.v.txtSubtotal.text = Global.subTotalHarga.toString()
+
             }else{
                 Global.carts.remove(Global.carts[position])
                 notifyItemRemoved(position)
             }
-
+            var now = 0
+            if(Global.carts.count()>0) {
+                for (i in 0 until (Global.carts.size)) {
+                    now += Global.carts[i].harga * Global.carts[i].qty;
+                }
+                Global.subTotalHarga = now
+            }
+            else{
+                Global.subTotalHarga = 0
+            }
+            //holder.v.txtSubtotal.text = Global.subTotalHarga.toString()
         }
 
         holder.v.btnPlus.setOnClickListener{
@@ -92,6 +102,7 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
             }
             Global.qtyG = qty
             Global.subTotalHarga = currentHarga
+
         }
         System.out.println("subtotal "+ Global.subTotalHarga)
 

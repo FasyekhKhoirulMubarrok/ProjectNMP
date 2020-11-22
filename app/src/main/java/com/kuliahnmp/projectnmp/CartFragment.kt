@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -32,7 +33,7 @@ class CartFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    //var v:View ?= null
+    var v:View ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -51,13 +52,37 @@ class CartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val v =  inflater.inflate(R.layout.fragment_cart, container, false)
+        v =  inflater.inflate(R.layout.fragment_cart, container, false)
         //var s = v.findViewById<TextView>(R.id.txtSubtotal)
+        return v
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // RecyclerView node initialized here
+        cartView.apply {
+            // set a LinearLayoutManager to handle Android
+            // RecyclerView behavior
+            layoutManager = LinearLayoutManager(activity)
+            // set the custom adapter to the RecyclerView
+
+            adapter = CartAdapter(Global.carts, activity!!.applicationContext)
+
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        var rv = v?.findViewById<RecyclerView>(R.id.cartView)
+        val lm: LinearLayoutManager = LinearLayoutManager(activity)
+        rv?.layoutManager = lm
+        rv?.setHasFixedSize(true)
+        if(activity!= null) {
+            rv?.adapter = CartAdapter(Global.carts, activity!!.applicationContext)
+        }
         val formatter: NumberFormat = DecimalFormat("#,###")
         var subTotalHargaFormat: String = formatter.format(Global.subTotalHarga)
-        v.txtSubtotal.text = "Rp."+ subTotalHargaFormat
-
-        v.btnCheckout.setOnClickListener{
+        v?.txtSubtotal?.text = "Rp."+ subTotalHargaFormat
+        v?.btnCheckout?.setOnClickListener{
             val q = Volley.newRequestQueue(activity!!.applicationContext)
             val url = "http://ubaya.prototipe.net/nmp160418005/addhistory.php" // ?id=1
 
@@ -85,21 +110,6 @@ class CartFragment : Fragment() {
             }
 
             q.add(stringRequest)
-        }
-
-        return v
-    }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        // RecyclerView node initialized here
-        cartView.apply {
-            // set a LinearLayoutManager to handle Android
-            // RecyclerView behavior
-            layoutManager = LinearLayoutManager(activity)
-            // set the custom adapter to the RecyclerView
-
-            adapter = CartAdapter(Global.carts, activity!!.applicationContext)
-
         }
     }
 

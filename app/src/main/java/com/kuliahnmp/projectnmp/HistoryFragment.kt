@@ -84,6 +84,7 @@ class HistoryFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
+
         Global.histories.clear()
         bacadata()
     }
