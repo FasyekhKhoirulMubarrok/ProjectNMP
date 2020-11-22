@@ -1,5 +1,6 @@
 package com.kuliahnmp.projectnmp
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,7 +9,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_cart.*
+import kotlinx.android.synthetic.main.fragment_cart.view.*
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
@@ -36,6 +42,33 @@ class CartFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
 
         }
+//        btnCheckout.setOnClickListener{
+//            val q = Volley.newRequestQueue(activity!!.applicationContext)
+//            val url = "http://ubaya.prototipe.net/nmp160418005/addhistory.php" // ?id=1
+//
+//            val stringRequest = object : StringRequest(
+//                Request.Method.POST, url,
+//                Response.Listener {
+//                    Log.d("cekparams", it)},
+//                Response.ErrorListener {
+//                    Log.d("cekparams", it.message.toString())
+//
+//                }
+//            )
+//            {
+////                override fun getParams(): MutableMap<String, String> {
+////                    val params = HashMap<String, String>()
+////                    params["tanggalorder"] = txtJudul.text.toString()
+////                    params["qty"] = txtSubjudul.text.toString() // di for
+////                    params["jmljenis"] = txtDeskripsi.text.toString()
+////                    params["grandtotal"] = txtUrl.text.toString()
+////
+////                    return params
+////                }
+//            }
+//
+//            q.add(stringRequest)
+//        }
         //updateList()
         Log.d("cekisiarray", Global.carts.toString())
     }
@@ -46,17 +79,11 @@ class CartFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v =  inflater.inflate(R.layout.fragment_cart, container, false)
-        var s = v.findViewById<TextView>(R.id.txtSubtotal)
-        if(Global.carts.count()>0) {
-            for (i in 0 until (Global.carts.size)) {
-
-                Global.subTotalHarga += Global.carts[i].harga * Global.carts[i].qty;
-                System.out.println("Index " + Global.subTotalHarga)
-            }
-        }
+        //var s = v.findViewById<TextView>(R.id.txtSubtotal)
         val formatter: NumberFormat = DecimalFormat("#,###")
         var subTotalHargaFormat: String = formatter.format(Global.subTotalHarga)
-        s.text = "Rp."+ subTotalHargaFormat.toString()
+        v.txtSubtotal.text = "Rp."+ subTotalHargaFormat
+
         return v
     }
 

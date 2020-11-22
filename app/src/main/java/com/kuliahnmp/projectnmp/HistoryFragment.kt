@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
@@ -89,11 +90,11 @@ class HistoryFragment : Fragment() {
     }
 
     fun updateList() {
-        val gl: GridLayoutManager = GridLayoutManager(activity, 2)
 
-        //val lm: LinearLayoutManager = LinearLayoutManager(activity)
+
+        val lm: LinearLayoutManager = LinearLayoutManager(activity)
         var recyclerView = v?.findViewById<RecyclerView>(R.id.histoView)
-        recyclerView?.layoutManager = gl
+        recyclerView?.layoutManager = lm
         recyclerView?.setHasFixedSize(true)
         recyclerView?.adapter = HistoAdapter(products, requireActivity())
 

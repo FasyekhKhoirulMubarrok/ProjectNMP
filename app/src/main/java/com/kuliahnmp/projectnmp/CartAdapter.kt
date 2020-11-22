@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cart_product_card_layout.view.*
 import kotlinx.android.synthetic.main.fragment_cart.view.*
-import kotlinx.android.synthetic.main.product_card_layout.view.*
 import kotlinx.android.synthetic.main.product_card_layout.view.imageView
 import kotlinx.android.synthetic.main.product_card_layout.view.txtDeskripsi
 import kotlinx.android.synthetic.main.product_card_layout.view.txtHarga
@@ -24,7 +23,10 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
         val deskripsi = v.findViewById<TextView>(R.id.txtDeskripsi)
         val harga = v.findViewById<TextView>(R.id.txtHarga)
         val qty = v.findViewById<TextView>(R.id.txtQty)
+
+//        val subtot = v.findViewById<TextView>(R.id.txtSubtotal)
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -49,28 +51,48 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
         val formattedNumber: String = formatter.format(myNumber)
         holder.v.txtHarga.text = "Rp."+ formattedNumber
         holder.v.btnMin.setOnClickListener{
-            carts[position].qty -= 1
-            holder.v.txtQty.text = carts[position].qty.toString()
-            Global.carts[position].qty = carts[position].qty
-            if(Global.carts.count()>0) {
-                for (i in 0 until (Global.carts.size)) {
+            var currentHarga = 0
+            carts[position].qty--
+            var currentQty = carts[position].qty
+            if(currentQty!=0){
 
-                    Global.subTotalHarga = Global.carts[i].harga * Global.carts[i].qty;
-                    System.out.println("Index " + Global.subTotalHarga)
+                holder.v.txtQty.text = currentQty.toString()
+                Global.carts[position].qty = currentQty
+                if(Global.carts.count()>0) {
+                    for (i in 0 until (Global.carts.size)) {
+
+                        Global.subTotalHarga += Global.carts[i].harga * Global.carts[i].qty;
+                        System.out.println("Index min "+ carts[position].judul+" " + Global.subTotalHarga)
+                        //holder.v.txtSubtotal.text = Global.subTotalHarga.toString()
+                        currentHarga += Global.subTotalHarga
+                    }
                 }
+                Global.subTotalHarga = currentHarga
+                System.out.println("Total now "+ Global.subTotalHarga)
+                holder.v.txtSubtotal.text = Global.subTotalHarga.toString()
+            }else{
+                Global.carts.remove(Global.carts[position])
             }
+
         }
         holder.v.btnPlus.setOnClickListener{
-            carts[position].qty += 1
-            holder.v.txtQty.text = carts[position].qty.toString()
-            Global.carts[position].qty = carts[position].qty
+            var currentHarga = 0
+            carts[position].qty++
+            var currentQty = carts[position].qty
+            holder.v.txtQty.text = currentQty.toString()
+            Global.carts[position].qty = currentQty
             if(Global.carts.count()>0) {
                 for (i in 0 until (Global.carts.size)) {
 
                     Global.subTotalHarga = Global.carts[i].harga * Global.carts[i].qty;
-                    System.out.println("Index " + Global.subTotalHarga)
+                    System.out.println("Index plus "+ carts[position].judul+" " + Global.subTotalHarga)
+                    //
+                    currentHarga += Global.subTotalHarga
                 }
             }
+            Global.subTotalHarga = currentHarga
+            System.out.println("Total now "+ Global.subTotalHarga)
+            holder.v.txtSubtotal.text = Global.subTotalHarga.toString()
         }
 
     }
