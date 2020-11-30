@@ -31,7 +31,7 @@ class HistoryFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    //var histories:ArrayList<History> = ArrayList()
+
     var v:View ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,12 +56,11 @@ class HistoryFragment : Fragment() {
                     for(i in 0 until data.length()) {
                         val playObj = data.getJSONObject(i)
                         val history = History(
+                            playObj.getInt("id"),
                             playObj.getInt("orderid"),
                             playObj.getInt("users_id"),
                             playObj.getString("dateOrder"),
-                            playObj.getInt("jumItem"),
-                            playObj.getInt("subtotal"),
-                            playObj.getInt("qty")
+                            playObj.getInt("jumItem")
                         )
                         Global.histories.add(history)
                     }

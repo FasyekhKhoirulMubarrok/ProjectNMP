@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.history_card.view.*
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
 class HistoAdapter (
-    val histories: ArrayList<History>, val context: Context
+    val histories: ArrayList<History>,val context: Context
 )
     : RecyclerView.Adapter<HistoAdapter.ProductViewHolder>(){
 
@@ -36,14 +37,19 @@ class HistoAdapter (
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
 
         holder.v.txtOrderID.text = histories[position].id.toString()
-        holder.v.txtQty.text = histories[position].qty.toString()
         holder.v.txtJumlahJenis.text = histories[position].jumitem.toString()
         holder.v.txtDate.text= histories[position].orderdate.toString()
-        val formatter: NumberFormat = DecimalFormat("#,###")
-        val myNumber = histories[position].subtotal
-        val formattedNumber: String = formatter.format(myNumber)
-        holder.v.txtGrandTotal.text = "Rp."+ formattedNumber
+//        val formatter: NumberFormat = DecimalFormat("#,###")
+//        val myNumber = histories[position].subtotal
+//        val formattedNumber: String = formatter.format(myNumber)
+//        holder.v.txtGrandTotal.text = "Rp."+ formattedNumber
+//        setProductRecycler(holder.v.historyProductView, histories[position].products)
 
+    }
 
+    private fun setProductRecycler(recyclerView: RecyclerView, product: ArrayList<Product>){
+        val productAdapter = ProductAdapter(product , context)
+        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        recyclerView.adapter = productAdapter
     }
 }
