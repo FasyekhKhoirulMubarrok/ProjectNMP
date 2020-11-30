@@ -24,6 +24,7 @@ class DetailActivity : AppCompatActivity() {
 
 
         var intent = intent
+        val dId = intent.getIntExtra("dId",0)
         val dJudul = intent.getStringExtra("dJudul")
         val dDeskripsi = intent.getStringExtra("dDeskripsi")
         val dKategori = intent.getStringExtra("dKategori")
@@ -53,7 +54,7 @@ class DetailActivity : AppCompatActivity() {
             }
             if(Global.carts.count()==0 || ada == false)
             {
-                var product = Cart(dJudul.toString(),dDeskripsi.toString(),dGambar.toString(),dHarga,1)
+                var product = Cart(dId,dJudul.toString(),dDeskripsi.toString(),dGambar.toString(),dHarga,1)
                 Global.carts.add(product)
             }
             if(Global.carts.count()>0) {

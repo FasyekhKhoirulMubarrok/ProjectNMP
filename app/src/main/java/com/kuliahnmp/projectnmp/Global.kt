@@ -16,10 +16,8 @@ object Global {
     var histories:ArrayList<History> = ArrayList()
     var qtyG:Int =0
     var subTotalHarga:Int=0
-    val date = Calendar.getInstance().time
-    val formatter = SimpleDateFormat.getDateTimeInstance() //or use getDateInstance()
-    val formatedDate = formatter.format(date)
-    var orderDate = formatedDate
+
+    var orderId = 0
     // create a global variable which will hold your layout
 
 }

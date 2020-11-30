@@ -1,5 +1,6 @@
 package com.kuliahnmp.projectnmp
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -16,6 +17,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_cart.*
 import kotlinx.android.synthetic.main.fragment_cart.view.*
+import org.json.JSONObject
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
@@ -101,28 +103,54 @@ class CartFragment : Fragment() {
         var subTotalHargaFormat: String = formatter.format(Global.subTotalHarga)
         v?.txtSubtotal?.text = "Rp."+ subTotalHargaFormat
         v?.btnCheckout?.setOnClickListener{
+
+            val m = Volley.newRequestQueue(activity!!.applicationContext)
+            val urla = "http://ubaya.prototipe.net/nmp160418005/getOrderid.php?iduser="+Global.users[0].id
+
+            val stringRequest1 = object : StringRequest(
+                Request.Method.GET, urla,
+                Response.Listener {
+                    Log.d("cekOrderid", it)
+                    val obj = JSONObject(it)
+                    if(obj.getString("result") == "OK") {
+                        val data = obj.getJSONArray("data")
+                        Global.orderId = data.getJSONObject(0).getInt("orderid") +1
+                    }
+                },
+                Response.ErrorListener {
+                    Log.d("cekOrderid", it.message.toString())
+                }
+            ){}
+            m.add(stringRequest1)
+            Thread.sleep(3000)
+            //batas suci
+
             val q = Volley.newRequestQueue(activity!!.applicationContext)
             val url = "http://ubaya.prototipe.net/nmp160418005/addhistory.php" // ?id=1
 
             val stringRequest = object : StringRequest(
                 Request.Method.POST, url,
                 Response.Listener {
-                    Log.d("cekparams", it)},
+                    Log.d("TambahOrder", it)},
                 Response.ErrorListener {
-                    Log.d("cekparams", it.message.toString())
+                    Log.d("TambahOrder", it.message.toString())
 
                 }
             )
             {
                 override fun getParams(): MutableMap<String, String> {
                     val params = HashMap<String, String>()
-                    //params["productsid"] = Global.product[].toString()
+                    params["orderid"] = Global.orderId.toString()
                     params["usersid"] = Global.users[0].id.toString()
-                    params["tanggalorder"] = Global.orderDate.toString()
-                    params["qty"] = Global.carts[0].qty.toString()
                     params["jmlItem"] = Global.carts.count().toString()
-                    params["grandtotal"] = Global.subTotalHarga.toString()
 
+                    for(i in 0 until Global.carts.count())
+                    {
+                        params["products_id"+i.toString()] = Global.carts[i].id.toString()
+                        params["qty"+i.toString()] = Global.carts[i].qty.toString()
+                        params["subtotal"+i.toString()] = Global.carts[i].harga.toString()
+
+                    }
                     return params
                 }
             }

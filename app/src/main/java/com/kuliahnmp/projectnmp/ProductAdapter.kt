@@ -51,12 +51,14 @@ class ProductAdapter(
 
         holder.itemView.setOnClickListener{
             val model = products.get(position)
+            var id : Int = model.id
             var judul : String = model.judul
             var deskripsi : String = model.deskripsi
             var kategori : String = model.kategori
             var harga : Int = model.harga
             var gambar : String = model.image_url
             val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("dId",id)
             intent.putExtra("dJudul",judul)
             intent.putExtra("dDeskripsi",deskripsi)
             intent.putExtra("dKategori",kategori)
@@ -78,7 +80,7 @@ class ProductAdapter(
             }
             if(Global.carts.count()==0 || ada == false)
             {
-                var product = Cart(model.judul,model.deskripsi,model.image_url,model.harga,1)
+                var product = Cart(model.id,model.judul,model.deskripsi,model.image_url,model.harga,1)
                 Global.carts.add(product)
             }
             if(Global.carts.count()>0) {
@@ -86,6 +88,8 @@ class ProductAdapter(
                     Global.subTotalHarga = Global.carts[i].harga * Global.carts[i].qty;
                     //
                     currentHarga += Global.subTotalHarga
+
+
                 }
             }
             Global.subTotalHarga = currentHarga
