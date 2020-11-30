@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimary">#000000</color>
 <!--    primary dark itu di atas, Primary di atas default upperbar-->
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorPrimaryVariant">#000000</color>

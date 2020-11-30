@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +43,7 @@ class CartFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
 
         }
+        
 
         //updateList()
         Log.d("cekisiarray", Global.carts.toString())
@@ -67,24 +69,24 @@ class CartFragment : Fragment() {
             // set the custom adapter to the RecyclerView
 
             adapter = CartAdapter(Global.carts, activity!!.applicationContext)
-//            TimerQuest()
+            TimerQuest()
 
         }
     }
-//    fun TimerQuest(){
-//        var tick = 10;
-//        var count = object : CountDownTimer(1000000, 1000) {
-//            override fun onTick(p0: Long) {
-//                tick--;
-//                onResume()
-//            }
-//            override fun onFinish() {
-//
-//            }
-//        }
-//        count.start();
-//
-//    }
+    fun TimerQuest(){
+        var tick = 10;
+        var count = object : CountDownTimer(1000000, 1000) {
+            override fun onTick(p0: Long) {
+                tick--;
+                onResume()
+            }
+            override fun onFinish() {
+
+            }
+        }
+        count.start();
+
+    }
     override fun onResume() {
         super.onResume()
 
@@ -117,7 +119,7 @@ class CartFragment : Fragment() {
                     //params["productsid"] = Global.product[].toString()
                     params["usersid"] = Global.users[0].id.toString()
                     params["tanggalorder"] = Global.orderDate.toString()
-                    params["qty"] = Global.qtyG.toString()
+                    params["qty"] = Global.carts[0].qty.toString()
                     params["jmlItem"] = Global.carts.count().toString()
                     params["grandtotal"] = Global.subTotalHarga.toString()
 

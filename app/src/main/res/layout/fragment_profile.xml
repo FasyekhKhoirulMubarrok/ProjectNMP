@@ -9,16 +9,17 @@
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="622dp">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="76dp"
             android:text="Profile"
             android:textAppearance="@style/heading"
+            android:textColor="#000000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,20 +27,24 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="20dp"
             android:text="Atur Data diri dan Password"
+            android:textColor="#000000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout7"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:hint="Email"
+            app:boxStrokeColor="#FF6652"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
+            app:hintTextColor="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9">
@@ -52,12 +57,15 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout8"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Username"
+            app:boxStrokeColor="#FF6652"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
+            app:hintTextColor="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout7">
@@ -70,12 +78,15 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout9"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Password"
+            app:boxStrokeColor="#FF6652"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
+            app:hintTextColor="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
@@ -88,12 +99,15 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout10"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Repeat Password"
+            app:boxStrokeColor="#FF6652"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
+            app:hintTextColor="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout9">
@@ -104,15 +118,30 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
+        <ImageView
             android:id="@+id/btnChangeProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Change data profile"
+            android:src="@drawable/ic_button"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout10" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout10"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Change"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/btnChangeProfile"
+            app:layout_constraintEnd_toEndOf="@+id/btnChangeProfile"
+            app:layout_constraintStart_toStartOf="@+id/btnChangeProfile"
+            app:layout_constraintTop_toTopOf="@+id/btnChangeProfile" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

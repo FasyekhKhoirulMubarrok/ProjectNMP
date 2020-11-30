@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.ActionBarDrawerToggle
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.product_card_layout.view.*
@@ -19,6 +20,7 @@ class DetailActivity : AppCompatActivity() {
         val actionBar :ActionBar? = supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)
         actionBar!!.setDisplayShowHomeEnabled(true)
+
 
 
         var intent = intent
@@ -40,6 +42,7 @@ class DetailActivity : AppCompatActivity() {
 
         btnAdd2.setOnClickListener {
             var ada = false;
+            var currentHarga = 0
             if(Global.carts.count()>0) {
                 for (i in 0 until (Global.carts.size)) {
                     if (Global.carts[i].judul==dJudul) {
@@ -53,6 +56,19 @@ class DetailActivity : AppCompatActivity() {
                 var product = Cart(dJudul.toString(),dDeskripsi.toString(),dGambar.toString(),dHarga,1)
                 Global.carts.add(product)
             }
+            if(Global.carts.count()>0) {
+                for (i in 0 until (Global.carts.size)) {
+                    Global.subTotalHarga = Global.carts[i].harga * Global.carts[i].qty;
+                    //
+                    currentHarga += Global.subTotalHarga
+                }
+            }
+            Global.subTotalHarga = currentHarga
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 }

@@ -22,10 +22,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val actionBar : ActionBar? = supportActionBar
         val fragmentMan : FragmentManager? = supportFragmentManager
-
+        actionBar!!.setTitle(Html.fromHtml("<font color='black'>" + "Home" + "</font>"))
         //actionBar!!.setTitle(Html.fromHtml("<font color='black'>" + "Home" + "</font>"))
-        actionBar!!.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM)
-        actionBar!!.setCustomView(R.layout.actionbar)
+//        actionBar!!.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM)
+//        actionBar!!.setCustomView(R.layout.actionbar)
 
 
         fragments.add(HomeFragment())
@@ -48,15 +48,19 @@ class MainActivity : AppCompatActivity() {
                 bottomNav.setOnNavigationItemSelectedListener {
                     if(it.itemId == R.id.itemHome) {
                         viewPager.currentItem = 0
+                        actionBar!!.setTitle(Html.fromHtml("<font color='black'>" + "Home" + "</font>"))
                     } else if(it.itemId == R.id.itemCart) {
                         viewPager.currentItem = 1
                         fragmentMan!!.beginTransaction().detach(fragments[1]).attach(fragments[1]).commit()
+                        actionBar!!.setTitle(Html.fromHtml("<font color='black'>" + "Cart" + "</font>"))
                     }else if(it.itemId == R.id.itemHistory) {
                         viewPager.currentItem = 2
                         fragmentMan!!.beginTransaction().detach(fragments[2]).attach(fragments[2]).commit()
+                        actionBar!!.setTitle(Html.fromHtml("<font color='black'>" + "History" + "</font>"))
                     }else {
                         viewPager.currentItem = 3
                         //fragmentMan!!.beginTransaction().detach(fragments[3]).attach(fragments[3]).commit()
+                        actionBar!!.setTitle(Html.fromHtml("<font color='black'>" + "Profile" + "</font>"))
                     }
                     true
 

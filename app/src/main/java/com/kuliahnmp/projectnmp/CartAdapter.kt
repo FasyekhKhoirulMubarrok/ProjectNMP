@@ -104,7 +104,6 @@ class CartAdapter(val carts: ArrayList<Cart>, val context: Context): RecyclerVie
             }
             Global.qtyG = qty
             Global.subTotalHarga = currentHarga
-
         }
         System.out.println("subtotal "+ Global.subTotalHarga)
     }
