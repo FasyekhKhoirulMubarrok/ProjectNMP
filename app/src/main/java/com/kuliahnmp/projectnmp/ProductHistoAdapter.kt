@@ -5,12 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.history_card.view.*
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.history_product_card.view.*
+import kotlinx.android.synthetic.main.history_product_card.view.imageView
+import kotlinx.android.synthetic.main.history_product_card.view.txtDeskripsi
+import kotlinx.android.synthetic.main.history_product_card.view.txtHarga
+import kotlinx.android.synthetic.main.history_product_card.view.txtJudul
+import kotlinx.android.synthetic.main.product_card_layout.view.*
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
-class ProductHistoAdapter (val products: ArrayList<Product>,val context: Context)
+class ProductHistoAdapter (val historyList: ArrayList<productHistory>, val histories: ArrayList<History>, val context: Context)
     : RecyclerView.Adapter<ProductHistoAdapter.ProductViewHolder>()
 {
     class ProductViewHolder(val v: View): RecyclerView.ViewHolder(v){
@@ -29,14 +35,20 @@ class ProductHistoAdapter (val products: ArrayList<Product>,val context: Context
     }
 
     override fun getItemCount(): Int {
-        return products.size
+        return historyList.size
     }
 
     override fun onBindViewHolder(holder: ProductHistoAdapter.ProductViewHolder, position: Int) {
-        holder.v.txtJudul.text = products[position].judul
-        holder.v.txtDeskripsi.text = products[position].deskripsi
-//        holder.v.txtQty.text = products[position].qty
-//        holder.v.txtHarga.text = products[position].harga
+        val url = historyList[position].image_url
+        Picasso.get().load(url).into(holder.v.imageView)
+        holder.v.txtJudul.text = historyList[position].judul
+        holder.v.txtDeskripsi.text = historyList[position].deskripsi
+        var qty = histories[position].qty
+        val formatter: NumberFormat = DecimalFormat("#,###")
+        val myNumber = qty * historyList[position].harga
+        val formattedNumber: String = formatter.format(myNumber)
+        holder.v.txtHarga.text = "Rp."+ formattedNumber
+        holder.v.txtQty.text = qty.toString()
 
 
     }

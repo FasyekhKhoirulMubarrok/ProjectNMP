@@ -60,12 +60,15 @@ class HistoryFragment : Fragment() {
                             playObj.getInt("orderid"),
                             playObj.getInt("users_id"),
                             playObj.getString("dateOrder"),
-                            playObj.getInt("jumItem")
+                            playObj.getInt("jumItem"),
+                            playObj.getInt("products_id"),
+                            playObj.getInt("qty"),
+                            playObj.getInt("subtotal")
                         )
                         Global.histories.add(history)
                     }
                     updateList()
-                    Log.d("cekisiarray", Global.histories.toString())
+                    Log.d("isihistory", Global.histories.toString())
                 }
             },
             Response.ErrorListener {
@@ -80,6 +83,45 @@ class HistoryFragment : Fragment() {
             }
         }
         q.add(stringRequest)
+        Thread.sleep(3000)
+        // batas suci getProduct on history
+
+        val q1 = Volley.newRequestQueue(activity)
+        val url1 = "http://ubaya.prototipe.net/nmp160418005/getHistoProduct.php"
+        var stringRequest1 = object : StringRequest(
+            Request.Method.POST, url1,
+            Response.Listener<String> {
+                Log.d("prodhistori", it)
+                val obj = JSONObject(it)
+                if(obj.getString("result") == "OK") {
+                    val data = obj.getJSONArray("data")
+                    for(i in 0 until data.length()) {
+                        val playObj = data.getJSONObject(i)
+                        val productHistory = productHistory(
+                            playObj.getInt("id"),
+                            playObj.getString("judul"),
+                            playObj.getString("deskripsi"),
+                            playObj.getString("image_url"),
+                            playObj.getInt("harga")
+                        )
+                        Global.productHistories.add(productHistory)
+                    }
+                    updateList()
+                    Log.d("isiprodhistory", Global.productHistories.toString())
+                }
+            },
+            Response.ErrorListener {
+                Log.e("apiresult", it.message.toString())
+            })
+        {
+            override fun getParams(): MutableMap<String, String> {
+                val params = HashMap<String, String>()
+
+                params["products_id"] = Global.histories[0].productId.toString()
+                return params
+            }
+        }
+        q1.add(stringRequest1)
     }
     override fun onResume() {
         super.onResume()
@@ -103,7 +145,7 @@ class HistoryFragment : Fragment() {
         var recyclerView = v?.findViewById<RecyclerView>(R.id.histoView)
         recyclerView?.layoutManager = lm
         recyclerView?.setHasFixedSize(true)
-        recyclerView?.adapter = HistoAdapter(Global.histories, requireActivity())
+        recyclerView?.adapter = HistoAdapter(Global.histories, Global.productHistories ,requireActivity())
 
     }
 

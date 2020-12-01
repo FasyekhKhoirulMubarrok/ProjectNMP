@@ -16,7 +16,7 @@ object Global {
     var histories:ArrayList<History> = ArrayList()
     var qtyG:Int =0
     var subTotalHarga:Int=0
-    var productHistories: ArrayList<Product> = ArrayList()
+    var productHistories: ArrayList<productHistory> = ArrayList()
     var orderId = 0
     // create a global variable which will hold your layout
 

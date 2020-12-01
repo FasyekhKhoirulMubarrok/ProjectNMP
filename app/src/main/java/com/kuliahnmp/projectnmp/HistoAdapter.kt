@@ -12,7 +12,7 @@ import java.text.DecimalFormat
 import java.text.NumberFormat
 
 class HistoAdapter (
-    val histories: ArrayList<History>,val context: Context
+    val histories: ArrayList<History>, val productHistory: ArrayList<productHistory> ,val context: Context
 )
     : RecyclerView.Adapter<HistoAdapter.ProductViewHolder>(){
 
@@ -36,19 +36,19 @@ class HistoAdapter (
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
 
-        holder.v.txtOrderID.text = histories[position].id.toString()
+        holder.v.txtOrderID.text = histories[position].orderid.toString()
         holder.v.txtJumlahJenis.text = histories[position].jumitem.toString()
         holder.v.txtDate.text= histories[position].orderdate.toString()
 //        val formatter: NumberFormat = DecimalFormat("#,###")
 //        val myNumber = histories[position].subtotal
 //        val formattedNumber: String = formatter.format(myNumber)
 //        holder.v.txtGrandTotal.text = "Rp."+ formattedNumber
-//        setProductRecycler(holder.v.historyProductView, histories[position].products)
+        setProductRecycler(holder.v.historyProductView, productHistory, histories)
 
     }
 
-    private fun setProductRecycler(recyclerView: RecyclerView, product: ArrayList<Product>){
-        val productAdapter = ProductAdapter(product , context)
+    private fun setProductRecycler(recyclerView: RecyclerView, historyItem: ArrayList<productHistory>, histories: ArrayList<History>){
+        val productAdapter = ProductHistoAdapter(historyItem,  histories, context)
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recyclerView.adapter = productAdapter
     }
