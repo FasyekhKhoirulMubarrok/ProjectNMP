@@ -9,17 +9,19 @@
         android:id="@+id/txtHarga"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:text="Harga"
         android:textAppearance="@style/subtitle"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/txtDeskripsi" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="119dp"
-        android:layout_height="0dp"
+        android:layout_height="115dp"
+        android:layout_marginStart="16dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,22 +33,23 @@
         android:id="@+id/txtQty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/poppins_semibold"
         android:text="0"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/txtJudul"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtJudul" />
 
     <TextView
         android:id="@+id/txtDeskripsi"
-        android:layout_width="216dp"
-        android:layout_height="16dp"
+        android:layout_width="220dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:text="Description"
         android:textAppearance="@style/body"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/txtJudul" />
 
@@ -54,13 +57,12 @@
         android:id="@+id/txtJudul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
         android:text="Judul"
         android:textAppearance="@style/heading"
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

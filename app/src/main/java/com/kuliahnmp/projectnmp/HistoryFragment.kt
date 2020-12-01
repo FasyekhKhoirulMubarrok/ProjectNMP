@@ -57,7 +57,7 @@ class HistoryFragment : Fragment() {
                     for(i in 0 until data.length()) {
                         val playObj = data.getJSONObject(i)
                         Log.e("playobj",playObj.toString())
-                        val listProductHistor: ArrayList<productHistory> = ArrayList()
+                        val listProductHistor: ArrayList<ProductHistory> = ArrayList()
                         val listDetailHist = playObj.getJSONArray("detilproduct")
                         for (i in 0 until listDetailHist.length())
                         {
@@ -66,7 +66,7 @@ class HistoryFragment : Fragment() {
                             {
                                 if(Global.productSementara[i].id == product.getInt("products_id"))
                                 {
-                                    val testhist = productHistory(Global.productSementara[i].id,Global.productSementara[i].judul,Global.productSementara[i].deskripsi,Global.productSementara[i].image_url,Global.productSementara[i].harga,product.getInt("qty"))
+                                    val testhist = ProductHistory(Global.productSementara[i].id,Global.productSementara[i].judul,Global.productSementara[i].deskripsi,Global.productSementara[i].image_url,Global.productSementara[i].harga,product.getInt("qty"))
                                     listProductHistor.add(testhist)
                                 }
                             }
