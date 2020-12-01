@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:text="Jumlah Jenis:"
                 android:textAppearance="@style/subtitle"
                 app:layout_constraintBottom_toBottomOf="parent"

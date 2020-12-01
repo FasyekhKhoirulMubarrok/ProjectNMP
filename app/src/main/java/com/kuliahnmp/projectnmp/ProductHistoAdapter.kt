@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.product_card_layout.view.*
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
-class ProductHistoAdapter (val historyList: ArrayList<productHistory>, val context: Context)
+class ProductHistoAdapter (val historyList: ArrayList<ProductHistory>, val context: Context)
     : RecyclerView.Adapter<ProductHistoAdapter.ProductViewHolder>()
 {
     class ProductViewHolder(val v: View): RecyclerView.ViewHolder(v){
