@@ -18,6 +18,7 @@ object Global {
     var subTotalHarga:Int=0
     var productHistories: ArrayList<productHistory> = ArrayList()
     var orderId = 0
+    var productSementara: ArrayList<Product> = ArrayList()
     // create a global variable which will hold your layout
 
 }

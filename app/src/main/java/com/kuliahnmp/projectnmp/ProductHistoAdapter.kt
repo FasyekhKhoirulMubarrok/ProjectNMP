@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.product_card_layout.view.*
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
-class ProductHistoAdapter (val historyList: ArrayList<productHistory>, val histories: ArrayList<History>, val context: Context)
+class ProductHistoAdapter (val historyList: ArrayList<productHistory>, val context: Context)
     : RecyclerView.Adapter<ProductHistoAdapter.ProductViewHolder>()
 {
     class ProductViewHolder(val v: View): RecyclerView.ViewHolder(v){
@@ -43,7 +43,7 @@ class ProductHistoAdapter (val historyList: ArrayList<productHistory>, val histo
         Picasso.get().load(url).into(holder.v.imageView)
         holder.v.txtJudul.text = historyList[position].judul
         holder.v.txtDeskripsi.text = historyList[position].deskripsi
-        var qty = histories[position].qty
+        var qty = historyList[position].qty
         val formatter: NumberFormat = DecimalFormat("#,###")
         val myNumber = qty * historyList[position].harga
         val formattedNumber: String = formatter.format(myNumber)

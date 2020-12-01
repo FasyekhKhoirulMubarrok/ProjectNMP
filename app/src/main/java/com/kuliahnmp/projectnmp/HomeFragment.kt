@@ -59,6 +59,7 @@ class HomeFragment : Fragment() {
                             playObj.getInt("harga")
                         )
                         products.add(product)
+                        Global.productSementara.add(product)
                     }
                     updateList()
                     Log.d("cekisiarray", products.toString())
