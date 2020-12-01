@@ -47,9 +47,9 @@ class HistoAdapter (
 
     }
 
-    private fun setProductRecycler(recyclerView: RecyclerView, product: ArrayList<Product>){
-        val productAdapter = ProductAdapter(product , context)
-        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        recyclerView.adapter = productAdapter
-    }
+//    private fun setProductRecycler(recyclerView: RecyclerView, historyItem: ArrayList<ProductHistory>, histories: ArrayList<History>){
+//        val productAdapter = ProductHistoAdapter(historyItem,  histories, context)
+//        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+//        recyclerView.adapter = productAdapter
+//    }
 }

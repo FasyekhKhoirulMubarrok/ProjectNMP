@@ -43,7 +43,7 @@ class HistoryFragment : Fragment() {
 //        (activity as MainActivity?)!!
 //            .setActionBarTitle("History")
         bacadatahisto()
-        bacadatahistoprod()
+//        bacadatahistoprod()
     }
     fun bacadatahisto(){
         val q = Volley.newRequestQueue(activity)
@@ -83,51 +83,51 @@ class HistoryFragment : Fragment() {
         }
         q.add(stringRequest)
     }
-    fun bacadatahistoprod(){
-        val q1 = Volley.newRequestQueue(activity)
-        val url1 = "http://ubaya.prototipe.net/nmp160418005/getHistoProduct.php"
-        var stringRequest1 = object : StringRequest(
-            Request.Method.POST, url1,
-            Response.Listener<String> {
-                Log.d("prodhistori", it)
-                val obj = JSONObject(it)
-                if(obj.getString("result") == "OK") {
-                    val data = obj.getJSONArray("data")
-                    for(i in 0 until data.length()) {
-                        val playObj = data.getJSONObject(i)
-                        val productHistory = ProductHistory(
-                            playObj.getInt("id"),
-                            playObj.getString("judul"),
-                            playObj.getString("deskripsi"),
-                            playObj.getString("image_url"),
-                            playObj.getInt("harga")
-                        )
-                        Global.productHistories.add(productHistory)
-                    }
-                    updateList()
-                    Log.d("isiprodhistory", Global.productHistories.toString())
-                }
-            },
-            Response.ErrorListener {
-                Log.e("apiresult", it.message.toString())
-            })
-        {
-            override fun getParams(): MutableMap<String, String> {
-                val params = HashMap<String, String>()
-
-                params["products_id"] = Global.histories[0].productId.toString()
-                return params
-            }
-        }
-        q1.add(stringRequest1)
-    }
+//    fun bacadatahistoprod(){
+//        val q1 = Volley.newRequestQueue(activity)
+//        val url1 = "http://ubaya.prototipe.net/nmp160418005/getHistoProduct.php"
+//        var stringRequest1 = object : StringRequest(
+//            Request.Method.POST, url1,
+//            Response.Listener<String> {
+//                Log.d("prodhistori", it)
+//                val obj = JSONObject(it)
+//                if(obj.getString("result") == "OK") {
+//                    val data = obj.getJSONArray("data")
+//                    for(i in 0 until data.length()) {
+//                        val playObj = data.getJSONObject(i)
+//                        val productHistory = ProductHistory(
+//                            playObj.getInt("id"),
+//                            playObj.getString("judul"),
+//                            playObj.getString("deskripsi"),
+//                            playObj.getString("image_url"),
+//                            playObj.getInt("harga")
+//                        )
+//                        Global.productHistories.add(productHistory)
+//                    }
+//                    updateList()
+//                    Log.d("isiprodhistory", Global.productHistories.toString())
+//                }
+//            },
+//            Response.ErrorListener {
+//                Log.e("apiresult", it.message.toString())
+//            })
+//        {
+//            override fun getParams(): MutableMap<String, String> {
+//                val params = HashMap<String, String>()
+//
+//                params["products_id"] = Global.histories[0].productId.toString()
+//                return params
+//            }
+//        }
+//        q1.add(stringRequest1)
+//    }
     override fun onResume() {
         super.onResume()
 
         Global.histories.clear()
-        Global.productHistories.clear()
+//        Global.productHistories.clear()
         bacadatahisto()
-        bacadatahistoprod()
+//        bacadatahistoprod()
     }
 
 
