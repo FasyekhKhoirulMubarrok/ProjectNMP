@@ -1,5 +1,6 @@
 package com.kuliahnmp.projectnmp
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.widget.Toast
@@ -89,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.itemCart -> viewPager.currentItem = 1
                 R.id.itemHistory -> viewPager.currentItem = 2
                 R.id.itemProfile -> viewPager.currentItem = 3
-                R.id.itemSignout -> Toast.makeText(this, "Sign Out", Toast.LENGTH_SHORT).show()
+                R.id.itemSignout -> startActivity(Intent(applicationContext, LoginActivity::class.java))
             }
             drawerLayout.closeDrawer(GravityCompat.START)
 
