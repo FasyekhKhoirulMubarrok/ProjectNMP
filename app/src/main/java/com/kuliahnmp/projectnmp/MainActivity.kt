@@ -2,12 +2,16 @@ package com.kuliahnmp.projectnmp
 
 import android.os.Bundle
 import android.text.Html
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.drawer_layout.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -15,18 +19,23 @@ class MainActivity : AppCompatActivity() {
     var fragments:ArrayList<Fragment> = ArrayList()
     var products:ArrayList<Product> = ArrayList()
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //////////////////////
         val actionBar : ActionBar? = supportActionBar
         val fragmentMan : FragmentManager? = supportFragmentManager
         actionBar!!.setTitle(Html.fromHtml("<font color='black'>" + "Home" + "</font>"))
         //actionBar!!.setTitle(Html.fromHtml("<font color='black'>" + "Home" + "</font>"))
 //        actionBar!!.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM)
 //        actionBar!!.setCustomView(R.layout.actionbar)
-
+        setContentView(R.layout.drawer_layout)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        var drawerToggle =
+            ActionBarDrawerToggle(this, drawerLayout ,R.string.app_name,
+                R.string.app_name)
+        drawerToggle.isDrawerIndicatorEnabled = true
+        drawerToggle.syncState()
 
         fragments.add(HomeFragment())
         fragments.add(CartFragment())
@@ -35,8 +44,8 @@ class MainActivity : AppCompatActivity() {
 
         viewPager.adapter = Adapter(this, fragments)
 
-        //viewPager.currentItem = 3
-        //viewPager.currentItem = 2
+        viewPager.currentItem = 3
+        viewPager.currentItem = 2
         viewPager.currentItem = 1
         viewPager.currentItem = 0
 
@@ -72,6 +81,21 @@ class MainActivity : AppCompatActivity() {
 
 
         })
+        navView.setNavigationItemSelectedListener {
+
+            when(it.itemId) {
+
+                R.id.itemHome -> viewPager.currentItem = 0
+                R.id.itemCart -> viewPager.currentItem = 1
+                R.id.itemHistory -> viewPager.currentItem = 2
+                R.id.itemProfile -> viewPager.currentItem = 3
+                R.id.itemSignout -> Toast.makeText(this, "Sign Out", Toast.LENGTH_SHORT).show()
+            }
+            drawerLayout.closeDrawer(GravityCompat.START)
+
+            true
+
+        }
 
 
     }

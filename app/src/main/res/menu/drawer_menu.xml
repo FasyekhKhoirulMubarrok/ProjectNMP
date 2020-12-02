@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/upper">
+        <item
+            android:id="@+id/itemHome"
+            android:checkable="true"
+            android:checked="true"
+            android:title="Home" />
+        <item
+            android:id="@+id/itemCart"
+            android:checkable="true"
+            android:checked="true"
+            android:title="Cart" />
+        <item
+            android:id="@+id/itemHistory"
+            android:checkable="true"
+            android:checked="true"
+            android:title="History" />
+        <item
+            android:id="@+id/itemProfile"
+            android:checkable="true"
+            android:checked="true"
+            android:title="Profile" />
+    </group>
+    <group android:id="@+id/bottom">
+        <item
+            android:id="@+id/itemSignout"
+            android:title="Signout" />
+    </group>
+</menu>
