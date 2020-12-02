@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = Adapter(this, fragments)
 
         //viewPager.currentItem = 3
-        viewPager.currentItem = 2
+        //viewPager.currentItem = 2
         viewPager.currentItem = 1
         viewPager.currentItem = 0
 

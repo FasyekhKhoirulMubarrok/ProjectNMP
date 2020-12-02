@@ -1,15 +1,20 @@
 package com.kuliahnmp.projectnmp
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
+import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 
@@ -23,6 +28,10 @@ class LoginActivity : AppCompatActivity() {
         actionBar!!.hide()
         //actionBar!!.setTitle(Html.fromHtml("<font color='black' >" + getString(R.string.app_name) + "</font>"))
 
+        fun errorLog(view: View){
+            val snack = Snackbar.make(view,"Invalid username and password.",Snackbar.LENGTH_LONG)
+            snack.show()
+        }
         btnLogin.setOnClickListener {
             val q = Volley.newRequestQueue(this)
             val url = "http://ubaya.prototipe.net/nmp160418005/loginproses.php"
@@ -48,9 +57,14 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish();
                     }
+                    else{
+                        errorLog(this.findViewById(R.id.layouts))
+                        txtUsernameLogin.setText("")
+                        txtPasswordLogin.setText("")
+                    }
                 },
                 Response.ErrorListener {
-                    Log.d("cekparams", it.message.toString())
+                    Log.d("cekfail", it.message.toString())
                 }
             )
             {
@@ -66,6 +80,9 @@ class LoginActivity : AppCompatActivity() {
         btnSignUp.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java);
             startActivity(intent)
+
         }
+
+
     }
 }

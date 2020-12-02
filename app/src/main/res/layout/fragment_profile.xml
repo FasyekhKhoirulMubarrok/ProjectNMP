@@ -144,6 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Old Password"
+            app:boxStrokeColor="#FF6652"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
