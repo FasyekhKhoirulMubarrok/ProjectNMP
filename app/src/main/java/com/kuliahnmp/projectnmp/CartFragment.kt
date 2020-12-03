@@ -78,7 +78,6 @@ class CartFragment : Fragment() {
 
             adapter = CartAdapter(Global.carts, activity!!.applicationContext)
             TimerQuest()
-
         }
     }
     fun TimerQuest(){
@@ -97,7 +96,6 @@ class CartFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-
         var rv = v?.findViewById<RecyclerView>(R.id.cartView)
         val lm: LinearLayoutManager = LinearLayoutManager(activity)
         rv?.layoutManager = lm
@@ -120,7 +118,7 @@ class CartFragment : Fragment() {
                     val obj = JSONObject(it)
                     if(obj.getString("result") == "OK") {
                         val data = obj.getJSONArray("data")
-                        Global.orderId = data.getJSONObject(0).getInt("orderid") +1
+                        Global.orderId = data.getJSONObject(0).getInt("orderid")
                     }
                 },
                 Response.ErrorListener {
@@ -137,7 +135,8 @@ class CartFragment : Fragment() {
             val stringRequest = object : StringRequest(
                 Request.Method.POST, url,
                 Response.Listener {
-                    Log.d("TambahOrder", it)},
+                    Log.d("TambahOrder", it)
+                    showMessageBox()},
                 Response.ErrorListener {
                     Log.d("TambahOrder", it.message.toString())
 
@@ -146,7 +145,7 @@ class CartFragment : Fragment() {
             {
                 override fun getParams(): MutableMap<String, String> {
                     val params = HashMap<String, String>()
-                    params["orderid"] = Global.orderId.toString()
+                    params["orderid"] = (Global.orderId + 1).toString()
                     params["usersid"] = Global.users[0].id.toString()
                     params["jmlItem"] = Global.carts.count().toString()
 
@@ -160,16 +159,15 @@ class CartFragment : Fragment() {
                     return params
                 }
             }
-
+            Log.e("orderid",Global.orderId.toString())
             q.add(stringRequest)
-            showMessageBox()
-//            emptyCart()
+
         }
     }
-//    fun emptyCart(){
-//        Global.carts.clear()
-//        Global.subTotalHarga = 0
-//    }
+    fun emptyCart(){
+        Global.carts.clear()
+        Global.subTotalHarga = 0
+    }
     fun showMessageBox(){
 
         val messageBoxView = LayoutInflater.from(activity).inflate(R.layout.message_box, null)
@@ -181,6 +179,7 @@ class CartFragment : Fragment() {
         val  messageBoxInstance = messageBoxBuilder.show()
 
         messageBoxView.setOnClickListener(){
+            emptyCart()
             messageBoxInstance.dismiss()
         }
     }

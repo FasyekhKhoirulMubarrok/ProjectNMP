@@ -95,14 +95,15 @@ class MainActivity : AppCompatActivity() {
                 viewPager.currentItem = 3
             }else{
                 startActivity(Intent(applicationContext, LoginActivity::class.java))
-//                Global.users.clear()
-//                Global.histories.clear()
-//                Global.productHistories.clear()
-//                Global.productSementara.clear()
-//                Global.carts.clear()
-//                Global.qtyG = 0
-//                Global.subTotalHarga = 0
-//                Global.orderId =0
+                Global.users.clear()
+                Global.histories.clear()
+                Global.productHistories.clear()
+                Global.productSementara.clear()
+                Global.carts.clear()
+                Global.qtyG = 0
+                Global.subTotalHarga = 0
+                Global.orderId =0
+                Log.e("isiGLobal",Global.toString())
                 finish()
             }
             drawerLayout.closeDrawer(GravityCompat.START)

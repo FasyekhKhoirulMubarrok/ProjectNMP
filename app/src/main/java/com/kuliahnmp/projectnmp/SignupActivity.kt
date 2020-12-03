@@ -32,7 +32,7 @@ class SignupActivity : AppCompatActivity() {
                             finish()
                         }
                         else{
-                            Toast.makeText(this, "Email sudah ada.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Email atau Username sudah terpakai", Toast.LENGTH_LONG).show()
                             txtEmailSG.setText("")
                             txtPasswordSG.setText("")
                             txtConfirmPassSG.setText("")
