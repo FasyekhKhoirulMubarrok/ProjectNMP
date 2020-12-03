@@ -6,8 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -36,34 +42,6 @@ class ProfileFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-
-
-//        btnChangeProfile.setOnClickListener {
-//            if(txtPasswordProfile.text.toString() == txtRepeatPasswordProfile.text.toString()) {
-//                val q = Volley.newRequestQueue(activity)
-//                val url = "http://ubaya.prototipe.net/nmp160418005/changeprofileproses.php"
-//                val stringRequest = object : StringRequest(
-//                    Request.Method.POST, url,
-//                    Response.Listener {
-//                        Log.d("cekparams", it)
-//                        Toast.makeText(activity, "Data Profile berhasil Diubah", Toast.LENGTH_SHORT).show()
-//                    },
-//                    Response.ErrorListener {
-//                        Log.d("cekparams", it.message.toString())
-//                    }
-//                ) {
-//                    override fun getParams(): MutableMap<String, String> {
-//                        val params = HashMap<String, String>()
-//                        params["email"] = txtEmailProfile.text.toString();
-//                        params["username"] = txtUsernameProfile.text.toString();
-//                        params["password"] = txtPasswordProfile.text.toString();
-//                        return params
-//                    }
-//                }
-//                q.add(stringRequest)
-//            }
-//        }
     }
 
     override fun onCreateView(
@@ -76,6 +54,44 @@ class ProfileFragment : Fragment() {
         var username = v?.findViewById<TextInputEditText>(R.id.txtUsernameProfile)
         email?.setText(Global.users[0].email)
         username?.setText(Global.users[0].username)
+
+
+        val btn = v?.findViewById<ImageView>(R.id.btnChangeProfile)
+
+        btn!!.setOnClickListener {
+            if(txtPasswordProfile.text.toString() == txtRepeatPasswordProfile.text.toString() &&
+                txtOldPass.text.toString() == Global.users[0].password) {
+                val q = Volley.newRequestQueue(activity)
+                val url = "http://ubaya.prototipe.net/nmp160418005/updateUser.php"
+                val stringRequest = object : StringRequest(
+                    Method.POST, url,
+                    Response.Listener {
+                        Log.d("cekparams", it)
+                        Toast.makeText(activity, "Data Profile berhasil Diubah", Toast.LENGTH_SHORT).show()
+                        //Global.users[0].password = txtPasswordProfile.text.toString()
+                    },
+                    Response.ErrorListener {
+                        Log.d("cekparams", it.message.toString())
+                    }
+                ) {
+                    override fun getParams(): MutableMap<String, String> {
+                        val params = HashMap<String, String>()
+                        params["email"] = txtEmailProfile.text.toString();
+                        params["uid"] = Global.users[0].id.toString()
+                        params["uname"] = txtUsernameProfile.text.toString();
+                        params["pass"] = txtPasswordProfile.text.toString();
+                        return params
+                    }
+                }
+                q.add(stringRequest)
+            }
+            else
+            {
+                Toast.makeText(activity, "Data masih salah", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
         return v
     }
 
