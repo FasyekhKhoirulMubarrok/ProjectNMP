@@ -52,18 +52,18 @@ class ProductAdapter(
         holder.itemView.setOnClickListener{
             val model = products.get(position)
             var id : Int = model.id
-            var judul : String = model.judul
-            var deskripsi : String = model.deskripsi
-            var kategori : String = model.kategori
-            var harga : Int = model.harga
-            var gambar : String = model.image_url
+//            var judul : String = model.judul
+//            var deskripsi : String = model.deskripsi
+//            var kategori : String = model.kategori
+//            var harga : Int = model.harga
+//            var gambar : String = model.image_url
             val intent = Intent(context, DetailActivity::class.java)
             intent.putExtra("dId",id)
-            intent.putExtra("dJudul",judul)
-            intent.putExtra("dDeskripsi",deskripsi)
-            intent.putExtra("dKategori",kategori)
-            intent.putExtra("dHarga",harga)
-            intent.putExtra("dGambar",gambar)
+//            intent.putExtra("dJudul",judul)
+//            intent.putExtra("dDeskripsi",deskripsi)
+//            intent.putExtra("dKategori",kategori)
+//            intent.putExtra("dHarga",harga)
+//            intent.putExtra("dGambar",gambar)
             context.startActivity(intent)
         }
         holder.v.btnAdd.setOnClickListener {
