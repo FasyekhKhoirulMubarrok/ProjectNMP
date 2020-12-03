@@ -1,5 +1,7 @@
 package com.kuliahnmp.projectnmp
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -7,6 +9,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +22,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_cart.*
 import kotlinx.android.synthetic.main.fragment_cart.view.*
+import kotlinx.android.synthetic.main.message_box.view.*
 import org.json.JSONObject
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -156,6 +162,26 @@ class CartFragment : Fragment() {
             }
 
             q.add(stringRequest)
+            showMessageBox()
+//            emptyCart()
+        }
+    }
+//    fun emptyCart(){
+//        Global.carts.clear()
+//        Global.subTotalHarga = 0
+//    }
+    fun showMessageBox(){
+
+        val messageBoxView = LayoutInflater.from(activity).inflate(R.layout.message_box, null)
+        val messageBoxBuilder = AlertDialog.Builder(activity).setView(messageBoxView)
+
+        messageBoxView.message_box_header.text = ""
+        messageBoxView.message_box_content.text = "Order Complete!"
+
+        val  messageBoxInstance = messageBoxBuilder.show()
+
+        messageBoxView.setOnClickListener(){
+            messageBoxInstance.dismiss()
         }
     }
 

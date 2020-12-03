@@ -4,11 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_signup.*
+import org.json.JSONObject
 
 class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,14 +23,23 @@ class SignupActivity : AppCompatActivity() {
                 val url = "http://ubaya.prototipe.net/nmp160418005/signupproses.php"
                 val stringRequest = object : StringRequest(
                     Request.Method.POST, url,
-                    Response.Listener {
-                        Log.d("cekparams", it)
-                        val intent = Intent(this, LoginActivity::class.java);
-                        startActivity(intent)
-                        finish();
+                    Response.Listener<String> {
+                        val obj = JSONObject(it)
+                        if(obj.getString("result") == "OK") {
+                            Log.d("ceksignup", it)
+                            val intent = Intent(this, LoginActivity::class.java);
+                            startActivity(intent)
+                            finish()
+                        }
+                        else{
+                            Toast.makeText(this, "Email sudah ada.", Toast.LENGTH_SHORT).show()
+                            txtEmailSG.setText("")
+                            txtPasswordSG.setText("")
+                            txtConfirmPassSG.setText("")
+                        }
                     },
                     Response.ErrorListener {
-                        Log.d("cekparams", it.message.toString())
+                        Log.d("ceksignup", it.message.toString())
                     }
                 ) {
                     override fun getParams(): MutableMap<String, String> {

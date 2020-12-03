@@ -59,36 +59,41 @@ class ProfileFragment : Fragment() {
         val btn = v?.findViewById<ImageView>(R.id.btnChangeProfile)
 
         btn!!.setOnClickListener {
-            if(txtPasswordProfile.text.toString() == txtRepeatPasswordProfile.text.toString() &&
-                txtOldPass.text.toString() == Global.users[0].password) {
-                val q = Volley.newRequestQueue(activity)
-                val url = "http://ubaya.prototipe.net/nmp160418005/updateUser.php"
-                val stringRequest = object : StringRequest(
-                    Method.POST, url,
-                    Response.Listener {
-                        Log.d("cekparams", it)
-                        Toast.makeText(activity, "Data Profile berhasil Diubah", Toast.LENGTH_SHORT).show()
-                        //Global.users[0].password = txtPasswordProfile.text.toString()
-                    },
-                    Response.ErrorListener {
-                        Log.d("cekparams", it.message.toString())
-                    }
+            if(txtOldPass.text.toString() == Global.users[0].password) {
+                if (txtPasswordProfile.text.toString() == txtRepeatPasswordProfile.text.toString()
                 ) {
-                    override fun getParams(): MutableMap<String, String> {
-                        val params = HashMap<String, String>()
-                        params["email"] = txtEmailProfile.text.toString();
-                        params["uid"] = Global.users[0].id.toString()
-                        params["uname"] = txtUsernameProfile.text.toString();
-                        params["pass"] = txtPasswordProfile.text.toString();
-                        return params
+                    val q = Volley.newRequestQueue(activity)
+                    val url = "http://ubaya.prototipe.net/nmp160418005/updateUser.php"
+                    val stringRequest = object : StringRequest(
+                        Method.POST, url,
+                        Response.Listener {
+                            Log.d("cekparams", it)
+                            Toast.makeText(
+                                activity,
+                                "Data Profile berhasil Diubah",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            //Global.users[0].password = txtPasswordProfile.text.toString()
+                        },
+                        Response.ErrorListener {
+                            Log.d("cekparams", it.message.toString())
+                        }
+                    ) {
+                        override fun getParams(): MutableMap<String, String> {
+                            val params = HashMap<String, String>()
+                            params["email"] = txtEmailProfile.text.toString();
+                            params["uid"] = Global.users[0].id.toString()
+                            params["uname"] = txtUsernameProfile.text.toString();
+                            params["pass"] = txtPasswordProfile.text.toString();
+                            return params
+                        }
                     }
+                    q.add(stringRequest)
+                } else {
+                    Toast.makeText(activity, "Password tidak sama", Toast.LENGTH_SHORT).show()
                 }
-                q.add(stringRequest)
-            }
-            else
-            {
-                Toast.makeText(activity, "Data masih salah", Toast.LENGTH_SHORT).show()
-            }
+            }else
+                Toast.makeText(activity, "Password lama salah", Toast.LENGTH_SHORT).show()
         }
 
 

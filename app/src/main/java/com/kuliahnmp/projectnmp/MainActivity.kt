@@ -3,6 +3,7 @@ package com.kuliahnmp.projectnmp
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         fragments.add(CartFragment())
         fragments.add(HistoryFragment())
         fragments.add(ProfileFragment())
-
+        Log.e("isi",Global.histories.toString())
         viewPager.adapter = Adapter(this, fragments)
 
         viewPager.currentItem = 3
@@ -84,13 +85,25 @@ class MainActivity : AppCompatActivity() {
         })
         navView.setNavigationItemSelectedListener {
 
-            when(it.itemId) {
-
-                R.id.itemHome -> viewPager.currentItem = 0
-                R.id.itemCart -> viewPager.currentItem = 1
-                R.id.itemHistory -> viewPager.currentItem = 2
-                R.id.itemProfile -> viewPager.currentItem = 3
-                R.id.itemSignout -> startActivity(Intent(applicationContext, LoginActivity::class.java))
+            if(it.itemId == R.id.itemHome) {
+                viewPager.currentItem = 0
+            } else if(it.itemId == R.id.itemCart) {
+                viewPager.currentItem = 1
+            }else if(it.itemId == R.id.itemHistory) {
+                viewPager.currentItem = 2
+            }else if(it.itemId == R.id.itemProfile){
+                viewPager.currentItem = 3
+            }else{
+                startActivity(Intent(applicationContext, LoginActivity::class.java))
+//                Global.users.clear()
+//                Global.histories.clear()
+//                Global.productHistories.clear()
+//                Global.productSementara.clear()
+//                Global.carts.clear()
+//                Global.qtyG = 0
+//                Global.subTotalHarga = 0
+//                Global.orderId =0
+                finish()
             }
             drawerLayout.closeDrawer(GravityCompat.START)
 
