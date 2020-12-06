@@ -1,5 +1,6 @@
 package com.kuliahnmp.projectnmp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,7 +17,9 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.fragment_profile.*
+import org.json.JSONObject
 import kotlin.math.log
 
 // TODO: Rename parameter arguments, choose names that match
@@ -67,6 +70,19 @@ class ProfileFragment : Fragment() {
                     val stringRequest = object : StringRequest(
                         Method.POST, url,
                         Response.Listener {
+                            val obj = JSONObject(it)
+                            if(obj.getString("result") == "OK") {
+                                Toast.makeText(activity, "Data profile telah terupdate", Toast.LENGTH_LONG).show()
+                                txtPasswordProfile.setText("")
+                                txtOldPass.setText("")
+                                txtRepeatPasswordProfile.setText("")
+                            }
+                            else{
+                                Toast.makeText(activity, "Data profile tidak terupdate", Toast.LENGTH_LONG).show()
+                                txtPasswordProfile.setText("")
+                                txtOldPass.setText("")
+                                txtRepeatPasswordProfile.setText("")
+                            }
                             Log.d("cekparams", it)
                             Toast.makeText(
                                 activity,
