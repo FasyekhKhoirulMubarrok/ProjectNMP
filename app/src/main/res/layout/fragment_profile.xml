@@ -72,7 +72,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="87dp"
             android:hint="New Password"
             app:boxStrokeColor="#FF6652"
             app:hintAnimationEnabled="true"
@@ -81,7 +81,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout12">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtPasswordProfile"
@@ -136,28 +136,6 @@
             app:layout_constraintEnd_toEndOf="@+id/btnChangeProfile"
             app:layout_constraintStart_toStartOf="@+id/btnChangeProfile"
             app:layout_constraintTop_toTopOf="@+id/btnChangeProfile" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout12"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Old Password"
-            app:boxStrokeColor="#FF6652"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            app:hintTextColor="#000000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtOldPass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/body" />
-        </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

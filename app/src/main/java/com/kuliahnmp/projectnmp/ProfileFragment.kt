@@ -62,7 +62,7 @@ class ProfileFragment : Fragment() {
         val btn = v?.findViewById<ImageView>(R.id.btnChangeProfile)
 
         btn!!.setOnClickListener {
-            if(txtOldPass.text.toString() == Global.users[0].password) {
+//            if(txtOldPass.text.toString() == Global.users[0].password) {
                 if (txtPasswordProfile.text.toString() == txtRepeatPasswordProfile.text.toString()
                 ) {
                     val q = Volley.newRequestQueue(activity)
@@ -74,21 +74,15 @@ class ProfileFragment : Fragment() {
                             if(obj.getString("result") == "OK") {
                                 Toast.makeText(activity, "Data profile telah terupdate", Toast.LENGTH_LONG).show()
                                 txtPasswordProfile.setText("")
-                                txtOldPass.setText("")
                                 txtRepeatPasswordProfile.setText("")
                             }
                             else{
                                 Toast.makeText(activity, "Data profile tidak terupdate", Toast.LENGTH_LONG).show()
                                 txtPasswordProfile.setText("")
-                                txtOldPass.setText("")
                                 txtRepeatPasswordProfile.setText("")
                             }
                             Log.d("cekparams", it)
-                            Toast.makeText(
-                                activity,
-                                "Data Profile berhasil Diubah",
-                                Toast.LENGTH_SHORT
-                            ).show()
+
                             //Global.users[0].password = txtPasswordProfile.text.toString()
                         },
                         Response.ErrorListener {
@@ -108,8 +102,8 @@ class ProfileFragment : Fragment() {
                 } else {
                     Toast.makeText(activity, "Password tidak sama", Toast.LENGTH_SHORT).show()
                 }
-            }else
-                Toast.makeText(activity, "Password lama salah", Toast.LENGTH_SHORT).show()
+//            }else
+//                Toast.makeText(activity, "Password lama salah", Toast.LENGTH_SHORT).show()
         }
 
 
