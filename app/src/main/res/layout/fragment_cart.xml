@@ -58,7 +58,9 @@
             android:src="@drawable/ic_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cartView" />
+            app:layout_constraintTop_toBottomOf="@+id/cartView"
+            app:srcCompat="@drawable/ic_rectangle_75"
+            tools:srcCompat="@drawable/ic_rectangle_75" />
 
         <TextView
             android:id="@+id/textView2"

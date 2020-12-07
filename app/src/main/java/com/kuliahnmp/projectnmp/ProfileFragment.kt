@@ -62,7 +62,7 @@ class ProfileFragment : Fragment() {
         val btn = v?.findViewById<ImageView>(R.id.btnChangeProfile)
 
         btn!!.setOnClickListener {
-//            if(txtOldPass.text.toString() == Global.users[0].password) {
+            if(txtPasswordProfile.text.toString() != "") {
                 if (txtPasswordProfile.text.toString() == txtRepeatPasswordProfile.text.toString()
                 ) {
                     val q = Volley.newRequestQueue(activity)
@@ -102,8 +102,8 @@ class ProfileFragment : Fragment() {
                 } else {
                     Toast.makeText(activity, "Password tidak sama", Toast.LENGTH_SHORT).show()
                 }
-//            }else
-//                Toast.makeText(activity, "Password lama salah", Toast.LENGTH_SHORT).show()
+            }else
+                Toast.makeText(activity, "Password masih kosong", Toast.LENGTH_SHORT).show()
         }
 
 

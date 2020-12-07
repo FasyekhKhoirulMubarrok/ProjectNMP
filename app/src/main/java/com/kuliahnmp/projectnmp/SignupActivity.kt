@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -17,6 +18,8 @@ class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
+        val actionBar : ActionBar? = supportActionBar
+        actionBar!!.hide()
         btnSignupOnSG.setOnClickListener {
             if(txtPasswordSG.text.toString() == txtConfirmPassSG.text.toString()) {
                 val q = Volley.newRequestQueue(this)
@@ -52,6 +55,11 @@ class SignupActivity : AppCompatActivity() {
                 }
                 q.add(stringRequest)
             }
+        }
+        btnLoginOnSG.setOnClickListener{
+            val intent = Intent(this, LoginActivity::class.java);
+            startActivity(intent)
+            finish()
         }
     }
 }
