@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         //////////////////////
         val actionBar : ActionBar? = supportActionBar
         val fragmentMan : FragmentManager? = supportFragmentManager
-        actionBar!!.setTitle(Html.fromHtml("<font color='black'>" + "Home" + "</font>"))
+        actionBar!!.setTitle(Html.fromHtml("<font color='black'>" + "epel store" + "</font>"))
         //actionBar!!.setTitle(Html.fromHtml("<font color='black'>" + "Home" + "</font>"))
 //        actionBar!!.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM)
 //        actionBar!!.setCustomView(R.layout.actionbar)
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 bottomNav.setOnNavigationItemSelectedListener {
                     if(it.itemId == R.id.itemHome) {
                         viewPager.currentItem = 0
-                        actionBar!!.setTitle(Html.fromHtml("<font color='black'>" + "Home" + "</font>"))
+                        actionBar!!.setTitle(Html.fromHtml("<font color='black'>" + "epel store" + "</font>"))
                     } else if(it.itemId == R.id.itemCart) {
                         viewPager.currentItem = 1
                         fragmentMan!!.beginTransaction().detach(fragments[1]).attach(fragments[1]).commit()

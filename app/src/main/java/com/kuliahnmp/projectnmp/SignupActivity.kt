@@ -21,40 +21,61 @@ class SignupActivity : AppCompatActivity() {
         val actionBar : ActionBar? = supportActionBar
         actionBar!!.hide()
         btnSignupOnSG.setOnClickListener {
-            if(txtPasswordSG.text.toString() == txtConfirmPassSG.text.toString()) {
-                val q = Volley.newRequestQueue(this)
-                val url = "http://ubaya.prototipe.net/nmp160418005/signupproses.php"
-                val stringRequest = object : StringRequest(
-                    Request.Method.POST, url,
-                    Response.Listener<String> {
-                        val obj = JSONObject(it)
-                        if(obj.getString("result") == "OK") {
-                            Log.d("ceksignup", it)
-                            val intent = Intent(this, LoginActivity::class.java);
-                            startActivity(intent)
-                            finish()
-                        }
-                        else{
-                            Toast.makeText(this, "Email atau Username sudah terpakai", Toast.LENGTH_LONG).show()
-                            txtEmailSG.setText("")
-                            txtPasswordSG.setText("")
-                            txtConfirmPassSG.setText("")
-                        }
-                    },
-                    Response.ErrorListener {
-                        Log.d("ceksignup", it.message.toString())
-                    }
-                ) {
-                    override fun getParams(): MutableMap<String, String> {
-                        val params = HashMap<String, String>()
-                        params["email"] = txtEmailSG.text.toString();
-                        params["username"] = txtUsernameSG.text.toString();
-                        params["password"] = txtPasswordSG.text.toString();
-                        return params
-                    }
-                }
-                q.add(stringRequest)
+            if(txtEmailSG.text.toString() == "" || txtUsernameSG.text.toString() == "" || txtPasswordSG.text.toString() == "" || txtConfirmPassSG.text.toString()==""){
+                Toast.makeText(
+                    this,
+                    "Input Data harus lengkap",
+                    Toast.LENGTH_LONG
+                ).show()
+
             }
+            else {
+                if (txtPasswordSG.text.toString() == txtConfirmPassSG.text.toString()) {
+                    val q = Volley.newRequestQueue(this)
+                    val url = "http://ubaya.prototipe.net/nmp160418005/signupproses.php"
+                    val stringRequest = object : StringRequest(
+                        Request.Method.POST, url,
+                        Response.Listener<String> {
+                            val obj = JSONObject(it)
+                            if (obj.getString("result") == "OK") {
+                                Log.d("ceksignup", it)
+                                val intent = Intent(this, LoginActivity::class.java);
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(
+                                    this,
+                                    "Email atau Username sudah terpakai",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                txtEmailSG.setText("")
+                                txtPasswordSG.setText("")
+                                txtConfirmPassSG.setText("")
+                            }
+                        },
+                        Response.ErrorListener {
+                            Log.d("ceksignup", it.message.toString())
+                        }
+                    ) {
+                        override fun getParams(): MutableMap<String, String> {
+                            val params = HashMap<String, String>()
+                            params["email"] = txtEmailSG.text.toString();
+                            params["username"] = txtUsernameSG.text.toString();
+                            params["password"] = txtPasswordSG.text.toString();
+                            return params
+                        }
+                    }
+                    q.add(stringRequest)
+                }
+                else {
+                    Toast.makeText(
+                        this,
+                        "Password tidak sama",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+
         }
         btnLoginOnSG.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java);
